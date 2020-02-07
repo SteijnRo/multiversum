@@ -1,6 +1,8 @@
 <?php
 
-echo "steijn is gay";
-echo "<br>no u";
+for ($i = 0; $i < 100; $i++)
+{
+    echo "luc is lesbian<br>";
+}
 
 ?>
