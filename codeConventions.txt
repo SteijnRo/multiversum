@@ -1,0 +1,19 @@
+if (condition) {
+    // code
+}
+
+for (condition) {
+    // code
+}
+
+while (condition) {
+    // code
+}
+
+do {
+    // code
+} while (condition)
+
+function name {
+    // code
+}
