@@ -43,7 +43,6 @@
           }
         }
           require_once 'model/dbase/dbclose.php';
-          // <a class=\"nav-link\"  href=\"$row[contact]\">Contact</a>
         ?>
     </ul>
   </div>
