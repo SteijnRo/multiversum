@@ -18,21 +18,36 @@
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item ">
-        <a class="nav-link" href="index.php">Home</a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" href="#">Producten</a>
-      </li>
+      <?php 
+        require_once 'model/dbase/config.php';
+        require_once 'model/dbase/dbopen.php';
+        $query = "SELECT * ";
+        $query .= "FROM header ";
+        
+        $preparedquery = $dbaselink->prepare($query);
+        $preparedquery->execute();
+        
+        if ($preparedquery->errno) {
+          Echo "Er is een fout opgetreden";
+        } else {
+          $result = $preparedquery->get_result();
+          if ($result->num_rows === 0 ) {
+            echo "Geen rijen gevonden";
+          } else {
+            while ($row = $result->fetch_assoc()) {
+              echo "<li class=\"nav-item\">
+              <a class=\"nav-link\"  href=\"$row[link]\">$row[name]</a>
+
+              </li>";
+            }
+          }
+        }
+          require_once 'model/dbase/dbclose.php';
+          // <a class=\"nav-link\"  href=\"$row[contact]\">Contact</a>
+        ?>
     </ul>
   </div>
 </nav>
 </body>
 </html>
-
-<?php
-
-echo "this is my header";
-
-?>
 
