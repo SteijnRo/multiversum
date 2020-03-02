@@ -41,3 +41,20 @@ html, body {
 
 }
 /* cards element end */
+
+/* standard button style start */
+.button {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    background: #16A085;
+    padding: 10px 10px;
+    border-radius: 4px;
+    font-weight: normal;
+    transition: all 0.2s ease-in-out;
+}
+  
+.glow-button:hover {
+    color: #ffffff;
+    box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+}
+/* standard button style end */
