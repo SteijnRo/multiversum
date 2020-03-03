@@ -2,29 +2,17 @@
   <div class="container">
     <ul class="list-inline mx-auto justify-content-center">
       <?php
-        // hoeft geen db te includen omdat dat al gebeurd in index.php
-        $query = "SELECT * ";
-        $query .= "FROM footer ";
+      $q = "SELECT * FROM footer";
+      $result = queryContent($q);
 
-        $preparedquery = $dbaselink->prepare($query);
-        $preparedquery->execute();
+      while ($row = $result->fetch_assoc()) {
+        echo "<li class=\"list-inline-item\">
+        <a class=\"nav-link\"  href=\"$row[link]\">$row[name]</a>
 
-        if ($preparedquery->errno) {
-          Echo "Er is een fout opgetreden";
-        } else {
-          $result = $preparedquery->get_result();
-          if ($result->num_rows === 0 ) {
-            echo "Geen rijen gevonden";
-          } else {
-            while ($row = $result->fetch_assoc()) {
-              echo "<li class=\"list-inline-item\">
-              <a class=\"nav-link\"  href=\"$row[link]\">$row[name]</a>
+        </li>";
+      }
 
-              </li>";
-            }
-          }
-        }
-      ?>
+      ?>  
       </ul>
   </div>
 </nav>

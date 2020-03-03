@@ -10,6 +10,7 @@ html, body {
 
 /* footer start */
 #footer{ 
+    margin: 5rem;
     background: #1ABC9C;
     height: 50px;
 }

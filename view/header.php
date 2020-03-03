@@ -21,27 +21,15 @@
     <ul class="navbar-nav mr-auto">
       <?php 
         // hoeft geen db te includen omdat dat al gebeurd in index.php
-        $query = "SELECT * ";
-        $query .= "FROM header ";
-        
-        $preparedquery = $dbaselink->prepare($query);
-        $preparedquery->execute();
-        
-        if ($preparedquery->errno) {
-          Echo "Er is een fout opgetreden";
-        } else {
-          $result = $preparedquery->get_result();
-          if ($result->num_rows === 0 ) {
-            echo "Geen rijen gevonden";
-          } else {
-            while ($row = $result->fetch_assoc()) {
-              echo "<li class=\"nav-item\">
-              <a class=\"nav-link\"  href=\"$row[link]\">$row[name]</a>
+        $q = "SELECT * FROM header";
+        $result = queryContent($q);
 
-              </li>";
-            }
-          }
+        while ($row = $result->fetch_assoc()) {
+          echo "<li class=\"nav-item\">
+          <a class=\"nav-link\"  href=\"$row[link]\">$row[name]</a>
+          </li>";
         }
+
         ?>
     </ul>
   </div>
