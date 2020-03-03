@@ -2,8 +2,8 @@
   <div class="container">
     <ul class="list-inline mx-auto justify-content-center">
       <?php
-      $q = "SELECT * FROM footer";
-      $result = queryContent($q);
+      $qry = "SELECT * FROM footer";
+      $result = queryContent($qry);
 
       while ($row = $result->fetch_assoc()) {
         echo "<li class=\"list-inline-item\">

@@ -1,3 +1,28 @@
+<?php
+$productsPerPage = 10;
+$page = "";
+$startProducts = "";
+
+if (isset($_GET["page"])) {
+  if (!is_null($_GET["page"])) {
+    $page = $_GET["page"];
+  }
+}
+
+$startProducts = $page * $productsPerPage - 10;
+
+
+// hoeft geen db te includen omdat dat al gebeurd in index.php
+// uitgecomment omdat database nog niet bestaat
+// $qry = "SELECT id, name, brand, desc, pic, price, qty, sale, salePercent ";
+// $qry .= "FROM products ";
+
+// $result = queryContent($qry);
+
+// while ($row = $result->fetch_assoc()) {
+//   $products[] = array($row["id"], $row["name"], $row["brand"], $row["desc"], $row["pic"], $row["price"], $row["qty"], $row["sale"], $row["salePercent"]);
+// }
+?>
 <div class="album py-5" id="main">
     <div class="container">
 
