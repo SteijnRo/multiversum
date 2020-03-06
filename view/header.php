@@ -20,9 +20,9 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <?php
-        for ($i=0; $i <count($header) ; $i++) { 
+        for ($i=0; $i <count($content[0]) ; $i++) { 
           echo "<li class=\"nav-item\">
-          <a class=\"nav-link\"  href=\"" . $header[$i]['link'] . "\">" . $header[$i]['name'] . "</a>
+          <a class=\"nav-link\"  href=\"" . $content[0][$i]['link'] . "\">" . $content[0][$i]['name'] . "</a>
           </li>";
         }
         ?>

@@ -18,15 +18,20 @@ class ProductLogic {
     }
   }
   public function readProducts() {
+    $header = readHeader();
+    $footer = readFooter();
     try {
       $qry = "SELECT id, name, brand, desc, pic, price, qty, sale, salePercent ";
       $qry .= "FROM products ";
       $res = $this->DataHandler->readsData($qry);
       $results = $res->fetchAll();
-      return $results;
+
+      $content = array( $header, $results, $footer);
+      return $content;
     }catch (Exception $e) {
       throw $e;
     }
+
   }
 
   public function updateContact() { }

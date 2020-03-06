@@ -23,6 +23,7 @@ $description = "This is a wider card with supporting text below as a natural lea
 // while ($row = $result->fetch_assoc()) {
 //   $products[] = array($row["id"], $row["name"], $row["brand"], $row["desc"], $row["pic"], $row["price"], $row["qty"], $row["sale"], $row["salePercent"]);
 // }
+include('view/header.php');
 ?>
 <div class="album py-5" id="main">
     <div class="container">

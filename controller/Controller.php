@@ -28,7 +28,7 @@ class Controller {
   public function collectCreateContact() {}
 
   public function collectReadProducts() { 
-      // $products = $this->ProductLogic->readProducts();
+      $products = $this->ProductLogic->readProducts();
       include_once 'view/main.php';
   }
 
