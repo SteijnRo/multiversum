@@ -4,7 +4,6 @@ require_once 'model/DataHandler.php';
 class ProductLogic {
   public function __construct() {
       $this->DataHandler = new Datahandler("localhost", "mysql", "multiverse", "root", "");
-      //"Luc@localhost", "kutmvc"
   }
   public function __destruct() { }
   public function createContacts() { }
@@ -20,8 +19,9 @@ class ProductLogic {
   }
   public function readProducts() {
     try {
-      $sql = 'SELECT * FROM products';
-      $res = $this->DataHandler->readsData($sql);
+      $qry = "SELECT id, name, brand, desc, pic, price, qty, sale, salePercent ";
+      $qry .= "FROM products ";
+      $res = $this->DataHandler->readsData($qry);
       $results = $res->fetchAll();
       return $results;
     }catch (Exception $e) {
