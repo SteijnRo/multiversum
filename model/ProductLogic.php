@@ -42,6 +42,17 @@ class ProductLogic {
       throw $e;
     }
   }
+
+  public function readFooter(){
+    try {
+      $sql = 'SELECT * FROM footer';
+      $res = $this->DataHandler->readsData($sql);
+      $results = $res->fetchAll();
+      return $results;
+    }catch (Exception $e) {
+      throw $e;
+    }
+  }
 }
 
 ?>

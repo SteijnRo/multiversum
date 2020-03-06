@@ -27,7 +27,7 @@ class Controller {
   public function collectCreateContact() {}
 
   public function collectReadProducts() { 
-      $products = $this->ProductLogic->readProducts();
+      // $products = $this->ProductLogic->readProducts();
       include_once 'view/main.php';
   }
 
@@ -41,7 +41,12 @@ class Controller {
 
   public function readHeader() {
     $header = $this->ProductLogic->readHeader();
-    include_once 'view/main.php';
+    include_once 'view/header.php';
+  }
+
+  public function readFooter() {
+    $header = $this->ProductLogic->readFooter();
+    include_once 'view/footer.php';
   }
 }
 ?>

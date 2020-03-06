@@ -59,5 +59,8 @@ class DataHandler{
 	public function readHeader(){
 		return $this->dbh->query($sql,PDO::FETCH_ASSOC);
 	}
+	public function readFooter(){
+		return $this->dbh->query($sql,PDO::FETCH_ASSOC);
+	}
 }
 ?>

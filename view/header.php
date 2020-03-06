@@ -21,10 +21,8 @@
     <ul class="navbar-nav mr-auto">
       <?php 
         // hoeft geen db te includen omdat dat al gebeurd in index.php
-        $qry = "SELECT * FROM header";
-        $result = queryContent($qry);
-
-        while ($row = $result->fetch_assoc()) {
+        var_dump($header);
+        while ($row = $header->fetch_assoc()) {
           echo "<li class=\"nav-item\">
           <a class=\"nav-link\"  href=\"$row[link]\">$row[name]</a>
           </li>";
