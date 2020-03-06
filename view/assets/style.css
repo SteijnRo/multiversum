@@ -39,7 +39,7 @@ html, body {
 /* cards element start */
 .card {
     margin: 50px;
-
+    width: 300px;
 }
 /* cards element end */
 
