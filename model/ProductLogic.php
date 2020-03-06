@@ -31,6 +31,17 @@ class ProductLogic {
 
   public function updateContact() { }
   public function deleteContact() { }
+
+  public function readHeader(){
+    try {
+      $sql = 'SELECT * FROM header';
+      $res = $this->DataHandler->readsData($sql);
+      $results = $res->fetchAll();
+      return $results;
+    }catch (Exception $e) {
+      throw $e;
+    }
+  }
 }
 
 ?>

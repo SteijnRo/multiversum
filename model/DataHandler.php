@@ -55,6 +55,9 @@ class DataHandler{
 	}
 	public function lastInsertId(){  
 		return $this->dbh->lastInsertId();  
+	} 
+	public function readHeader(){
+		return $this->dbh->query($sql,PDO::FETCH_ASSOC);
 	}
 }
 ?>
