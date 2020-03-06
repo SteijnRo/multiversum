@@ -1,30 +1,24 @@
 <?php
-require_once 'model/ContactsLogic.php';
+require_once 'model/ProductLogic.php';
 
-class ContactsController {
+class Controller {
     public function __construct() {
-        $this->ContactsLogic =  new ContactsLogic();
+        $this->ProductLogic =  new ProductLogic();
     }
     public function __destruct() {}
     public function handleRequest() { 
       try {
         $op = isset($_REQUEST['op'])?$_REQUEST['op']:null;
         switch($op) {
-          case 'create':
-          $this->collectCreateContact();
+          case 'main':
+            $this->collectReadProducts();
           break;
-          case 'reads':
-          $this->collectReadContacts();
-          break;
-          case 'read':
-          $this-> collectReadContact($_REQUEST['id']);
-          break;
-          case 'update':
-          $this->collectUpdateContact();
+          case 'contact':
+            $this->collectReadContacts();
           break;
           default:
-          $this->collectReadContacts();
-        break;
+            $this->collectReadProducts();
+          break;
         }
       } catch (Exception $e) {
         throw $e;
@@ -32,14 +26,14 @@ class ContactsController {
     }
   public function collectCreateContact() {}
 
-  public function collectReadContacts() { 
-      $contacts = $this->ContactsLogic->readContacts();
-      include 'view/reads.php';
+  public function collectReadProducts() { 
+      $products = $this->ProductLogic->readProducts();
+      include_once 'view/main.php';
   }
 
-  public function collectReadContact($id){
-    $contact = $this->ContactsLogic->readContact($id);
-    include 'view/read.php';
+  public function collectReadProduct($id){
+    $product = $this->ProductLogic->readProduct($id);
+    include_once 'view/read.php';
   }
   public function collectUpdateContact() {}
 

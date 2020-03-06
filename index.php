@@ -19,8 +19,8 @@
 
 // include('./view/footer.php');
 // require("./model/dbase/dbclose.php");
-require_once 'controller/ContactsController.php';
+require_once 'controller/Controller.php';
 
-$controller = new ContactsController();
+$controller = new Controller();
 $controller->handleRequest();
 ?>

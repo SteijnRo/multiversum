@@ -1,16 +1,16 @@
 <?php
 require_once 'model/DataHandler.php';
 
-class ContactsLogic {
+class ProductLogic {
   public function __construct() {
       $this->DataHandler = new Datahandler("localhost", "mysql", "multiverse", "root", "");
       //"Luc@localhost", "kutmvc"
   }
   public function __destruct() { }
   public function createContacts() { }
-  public function readContact($id) { 
+  public function readProduct($id) { 
     try {
-      $sql = "SELECT * FROM contacts WHERE id = $id";
+      $sql = "SELECT * FROM products WHERE id = $id";
       $res = $this->DataHandler->readsData($sql);
       $results = $res->fetchAll();
       return $results;
@@ -18,9 +18,9 @@ class ContactsLogic {
       throw $e;
     }
   }
-  public function readContacts() {
+  public function readProducts() {
     try {
-      $sql = 'SELECT * FROM contacts';
+      $sql = 'SELECT * FROM products';
       $res = $this->DataHandler->readsData($sql);
       $results = $res->fetchAll();
       return $results;
