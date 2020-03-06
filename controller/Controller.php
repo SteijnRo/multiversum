@@ -11,7 +11,8 @@ class Controller {
         $op = isset($_REQUEST['op'])?$_REQUEST['op']:null;
         switch($op) {
           case 'main':
-            $this->collectReadProducts();
+            // $this->collectReadProducts();
+            include_once "view/main.php";
           break;
           case 'contact':
             $this->collectReadContacts();

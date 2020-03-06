@@ -22,5 +22,7 @@
 require_once 'controller/Controller.php';
 
 $controller = new Controller();
+$controller->readHeader();
 $controller->handleRequest();
+$controller->readFooter();
 ?>
