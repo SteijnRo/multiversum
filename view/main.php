@@ -14,8 +14,6 @@ $description = "This is a wider card with supporting text below as a natural lea
 
 // $startProducts = $page * $productsPerPage - 10;
 
-
-// hoeft geen db te includen omdat dat al gebeurd in index.php
 // uitgecomment omdat database nog niet bestaat
 // $qry = "SELECT id, name, brand, desc, pic, price, qty, sale, salePercent ";
 // $qry .= "FROM products ";
