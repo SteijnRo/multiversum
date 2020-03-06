@@ -20,5 +20,5 @@ function queryContent($qry) {
       }
     }
   }
-
+  
 ?>
