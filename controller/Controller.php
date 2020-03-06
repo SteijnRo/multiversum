@@ -46,7 +46,7 @@ class Controller {
   }
 
   public function readFooter() {
-    $header = $this->ProductLogic->readFooter();
+    $footer = $this->ProductLogic->readFooter();
     include_once 'view/footer.php';
   }
 }

@@ -2,13 +2,10 @@
   <div class="container">
     <ul class="list-inline mx-auto justify-content-center">
       <?php
-      $qry = "SELECT * FROM footer";
-      $result = queryContent($qry);
 
-      while ($row = $result->fetch_assoc()) {
-        echo "<li class=\"list-inline-item\">
-        <a class=\"nav-link\"  href=\"$row[link]\">$row[name]</a>
-
+      for ($i=0; $i <count($footer) ; $i++) { 
+        echo "<li class=\"nav-item\">
+        <a class=\"nav-link\"  href=\"" . $footer[$i]['link'] . "\">". $footer[$i]['name']."</a>
         </li>";
       }
 
