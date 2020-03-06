@@ -38,5 +38,10 @@ class Controller {
   public function collectUpdateContact() {}
 
   public function collectDeleteContact() {}
+
+  public function readHeader() {
+    $header = $this->ProductLogic->readHeader();
+    include_once 'view/main.php';
+  }
 }
 ?>
