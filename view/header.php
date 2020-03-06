@@ -21,12 +21,19 @@
     <ul class="navbar-nav mr-auto">
       <?php 
         // hoeft geen db te includen omdat dat al gebeurd in index.php
-        var_dump($header);
-        while ($row = $header->fetch_assoc()) {
+
+        // while ($row = $header->fetch_assoc()) {
+        //   echo "<li class=\"nav-item\">
+        //   <a class=\"nav-link\"  href=\"$row[link]\">$row[name]</a>
+        //   </li>";
+        // }
+        for ($i=0; $i <count($header) ; $i++) { 
           echo "<li class=\"nav-item\">
-          <a class=\"nav-link\"  href=\"$row[link]\">$row[name]</a>
+          <a class=\"nav-link\"  href=\"$header[$i]['link']\">$header[$i]['name']</a>
           </li>";
         }
+        // var_dump($header);
+        // var_dump($header);
 
         ?>
     </ul>
