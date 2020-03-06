@@ -3,7 +3,7 @@ require_once 'model/DataHandler.php';
 
 class ContactsLogic {
   public function __construct() {
-      $this->DataHandler = new Datahandler("localhost", "mysql", "mvc", "root", "");
+      $this->DataHandler = new Datahandler("localhost", "mysql", "multiverse", "root", "");
       //"Luc@localhost", "kutmvc"
   }
   public function __destruct() { }
