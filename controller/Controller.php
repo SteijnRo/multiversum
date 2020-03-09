@@ -16,6 +16,9 @@ class Controller {
           case 'contact':
             $this->collectReadContacts();
           break;
+          case 'insertProducts':
+            $this->collectInsertFormProducts();
+          break;
           default:
             $this->collectReadProducts();
           break;
@@ -24,7 +27,12 @@ class Controller {
         throw $e;
       }
     }
-  public function collectCreateContact() {}
+  public function collectCreateProduct() {}
+
+  public function collectInsertFormProducts() {
+    $content = $this->ProductLogic->insertFormProducts();
+    include_once 'view/insertProducts.php';
+  }
 
   public function collectReadProducts() { 
     $content = $this->ProductLogic->readProducts();
@@ -32,7 +40,7 @@ class Controller {
   }
 
   public function collectReadContacts() {
-    $contact = $this->ProductLogic->readContact();
+    $content = $this->ProductLogic->readContacts();
     include_once 'view/contact.php';
   }
 

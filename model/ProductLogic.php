@@ -34,6 +34,18 @@ class ProductLogic {
     }
   }
 
+  public function insertFormProducts() {
+    $header = $this->readHeader();
+    $footer = $this->readFooter();
+    try {
+      // nothing as of yet
+      $content = array($header, "", $footer);
+      return $content;
+    }catch (Exception $e) {
+      throw $e;
+    }
+  }
+
   public function updateContact() { }
   public function deleteContact() { }
 
@@ -59,8 +71,12 @@ class ProductLogic {
     }
   }
   
-  public function readContact(){
-    try {}
+  public function readContacts(){
+    try {
+
+    }catch (Exception $e) {
+      throw $e;
+    }
   }
 }
 

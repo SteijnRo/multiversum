@@ -9,3 +9,6 @@ CREATE TABLE products (
     sale int(1),
     salePercent int(255)
 );
+
+-- INSERT INTO products (name, brand, specification, pic, price, qty, sale, salePercent)
+-- VALUES("test", "yes", "ah yes, its garbage", "stonks.jpg", 399.99, 5, 0, 40);

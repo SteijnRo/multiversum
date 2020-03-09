@@ -23,24 +23,24 @@ $products = $content[1];
         if (!isset($products[$startProducts])) {
           break;
         }
-      echo '
-      <div class="col-md-4">
-        <div class="card w-75">
-          <a href="#"><img class="card-img-top" src="./view/assets/media/' . $products[$startProducts]["pic"] . '" alt="pic"></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">' . $products[$startProducts]["name"] . '</a>
-            </h4>
-            <h5>' . $products[$startProducts]["price"] . '</h5>
-            <p class="card-text">' . $products[$startProducts]["specification"] . '</p>
+        echo '
+        <div class="col-md-4">
+          <div class="card w-75">
+            <a href="#"><img class="card-img-top" src="./view/assets/media/' . $products[$startProducts]["pic"] . '" alt="pic"></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">' . $products[$startProducts]["name"] . '</a>
+              </h4>
+              <h5>' . $products[$startProducts]["price"] . '</h5>
+              <p class="card-text">' . $products[$startProducts]["specification"] . '</p>
+            </div>
           </div>
         </div>
-      </div>
-      ';
-      // rating
-      // <div class="card-footer">
-      //   <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-      // </div>
+        ';
+        // rating
+        // <div class="card-footer">
+        //   <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+        // </div>
       }
       echo '</div>';
       ?>
