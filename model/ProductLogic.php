@@ -1,4 +1,10 @@
 <?php
+// Import PHPMailer classes into the global namespace
+// These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 require_once 'model/DataHandler.php';
 
 class ProductLogic {
@@ -137,6 +143,42 @@ class ProductLogic {
         // not uploaded
         return false;
       }
+    }
+  }
+
+  public function sendEmail($data) {
+    $mail = $data["email"];
+    $msg = $data["msg"];
+    // Load Composer's autoloader
+    require 'vendor/autoload.php';
+
+    // Instantiation and passing `true` enables exceptions
+    $mailer = new PHPMailer(false);
+    try {
+        //Server settings
+        $mailer->SMTPDebug = 0;                                       // Enable verbose debug output
+        $mailer->isSMTP();                                            // Send using SMTP
+        $mailer->Host       = "smtp.gmail.com";                       // Set the SMTP server to send through
+        $mailer->SMTPAuth   = true;                                   // Enable SMTP authentication
+        $mailer->Username   = 'devmailsr@gmail.com';                  // SMTP username
+        $mailer->Password   = '6sgRxk2hiQU7ZMF';                      // SMTP password
+        $mailer->SMTPSecure = "TLS";                                  // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+        $mailer->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+
+        // Recipients
+        $mailer->setFrom("devmailsr@gmail.com", "Dev email");
+        $mailer->addAddress("stro2002@hotmail.nl");
+        $mailer->addReplyTo($mail);
+
+        // content
+        $mailer->isHTML(TRUE);
+        $mailer->Subject = "Contact formilier ja toch";
+        $mailer->Body = $msg;
+
+        $mailer->send();
+        return true;
+    } catch (Exception $e) {
+        return false;
     }
   }
   

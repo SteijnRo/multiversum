@@ -18,8 +18,14 @@ include 'view/header.php';
         </ul>
 
     </div>
-    <!-- AIzaSyAwupTiz9gVsP1FPO9WEnpwM9wV5DYJi0I -->
 
+    <form action="?op=sendEmail" method="post">
+        <input type="text" name="email" placeholder="E-mail adres"><br>
+        <input type="text" name="msg" placeholder="Bericht"><br>
+        <input type="submit">
+    </form>
+
+    <!-- AIzaSyAwupTiz9gVsP1FPO9WEnpwM9wV5DYJi0I -->
     <iframe
   width="450"
   height="250"

@@ -22,6 +22,9 @@ class Controller {
           case 'addProduct':
             $this->collectCreateProduct();
           break;
+          case 'sendEmail':
+            $this->collectSendEmail();
+          break;
           default:
             $this->collectReadProducts();
           break;
@@ -54,6 +57,7 @@ class Controller {
     $product = $this->ProductLogic->readProduct($id);
     include_once 'view/read.php';
   }
+
   public function collectUpdateContact() {}
 
   public function collectDeleteContact() {}
@@ -66,6 +70,12 @@ class Controller {
   public function readFooter() {
     $footer = $this->ProductLogic->readFooter();
     include_once 'view/footer.php';
+  }
+
+  public function collectSendEmail(){
+    $this->ProductLogic->sendEmail($_POST);
+    $this->collectReadProducts();
+    include_once 'view/main.php';
   }
 }
 ?>
