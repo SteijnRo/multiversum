@@ -31,9 +31,8 @@ class Controller {
       }
     }
   public function collectCreateProduct() {
-    $content = $this->ProductLogic->createProduct($_POST);
-    var_dump($content[1]);
-    // include_once 'view/main.php';
+    $content = $this->ProductLogic->createProduct($_POST, $_FILES);
+    include_once 'view/insertProducts.php';
   }
 
   public function collectInsertFormProducts() {

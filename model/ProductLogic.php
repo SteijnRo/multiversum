@@ -6,20 +6,22 @@ class ProductLogic {
       $this->DataHandler = new Datahandler("localhost", "mysql", "multiverse", "root", "");
   }
   public function __destruct() { }
-  public function createProduct($data) {
+  public function createProduct($data, $files) {
     try {
       $header = $this->readHeader();
       $footer = $this->readFooter();
-      if (!isset($data["name"]) || !isset($data["brand"]) || !isset($data["specification"]) || !isset($data["pic"]) || !isset($data["price"]) || !isset($data["qty"]) || !isset($data["sale"]) || !isset($data["salePercent"])) {
-        $content = array($header, "", $footer);
+      $content = array($header, "", $footer);
+      if (!isset($data["name"]) || !isset($data["brand"]) || !isset($data["specification"]) || !isset($files["pic"]) || !isset($data["price"]) || !isset($data["qty"]) || !isset($data["sale"]) || !isset($data["salePercent"])) {
         return $content;
       }
       if (!$this->checkData($data)) {
-        $content = array($header, "", $footer);
+        return $content;
+      }
+      if (!$this->uploadFile($data, $files)) {
         return $content;
       }
       $sql = 'INSERT INTO products (name, brand, specification, pic, price, qty, sale, salePercent) ';
-      $sql .= 'VALUES("'.$data["name"].'", "'.$data["brand"].'", "'.$data["specification"].'", "'.$data["pic"].'", '.$data["price"].', '.$data["qty"].', '.$data["sale"].', '.$data["salePercent"].') ';
+      $sql .= 'VALUES("'.$data["name"].'", "'.$data["brand"].'", "'.$data["specification"].'", "'.$files["pic"]["name"].'", '.$data["price"].', '.$data["qty"].', '.$data["sale"].', '.$data["salePercent"].') ';
       // INSERT INTO products (name, brand, specification, pic, price, qty, sale, salePercent) VALUES("test", "samsung", "yes", "stonks.jpg", 123, 1, 0, 0);
       $result = $this->DataHandler->createData($sql);
       $content = array($header, $result, $footer);
@@ -103,6 +105,39 @@ class ProductLogic {
       }
     }
     return $return;
+  }
+
+  public function uploadFile($data, $files) {
+    $targetDir = "view/assets/media/";
+    $targetFile = $targetDir . basename($files["pic"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = pathinfo($targetFile,PATHINFO_EXTENSION);
+    // Check if image file is a actual image or fake image (0 bits)
+    $check = filesize($files["pic"]["tmp_name"]);
+    if($check !== false) {
+      $uploadOk = 1;
+    } else {
+      $uploadOk = 0;
+    }
+    // Check if  file already exists
+    if (file_exists($targetFile)) {
+      // not uploaded cause file with identical name already exists
+      return false;
+    }
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+      // not uploaded
+      return false;
+      // if everything is ok, try to upload file
+    } else {
+      if (move_uploaded_file($files["pic"]["tmp_name"], $targetFile)) {
+        // file uploaded
+        return true;
+      } else {
+        // not uploaded
+        return false;
+      }
+    }
   }
   
   public function readContacts(){

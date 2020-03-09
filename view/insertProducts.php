@@ -1,8 +1,15 @@
 <?php
 include_once "view/header.php";
 ?>
+
+<?php
+if ($content[1] != "") {
+  echo "<h1>Toegevoegd</h1>";
+}
+?>
+
 <div class="album py-5" id="main">
-<form action="?op=addProduct" method="post" style="margin:50px;" >
+<form action="?op=addProduct" method="POST" style="margin:50px;" enctype='multipart/form-data'>
   <div class="row align-self-center">
     <div class="col-md-4">
       <input type="text" class="form-control" name="name" placeholder="Bril naam">
