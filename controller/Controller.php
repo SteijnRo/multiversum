@@ -11,8 +11,7 @@ class Controller {
         $op = isset($_REQUEST['op'])?$_REQUEST['op']:null;
         switch($op) {
           case 'main':
-            // $this->collectReadProducts();
-            include_once "view/main.php";
+            $this->collectReadProducts();
           break;
           case 'contact':
             $this->collectReadContacts();
@@ -28,8 +27,8 @@ class Controller {
   public function collectCreateContact() {}
 
   public function collectReadProducts() { 
-      $products = $this->ProductLogic->readProducts();
-      include_once 'view/main.php';
+    $content = $this->ProductLogic->readProducts();
+    include_once 'view/main.php';
   }
 
   public function collectReadProduct($id){
