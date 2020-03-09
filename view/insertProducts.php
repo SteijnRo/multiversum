@@ -5,16 +5,16 @@ include_once "view/header.php";
 <form action="?op=addProduct" method="post" style="margin:50px;" >
   <div class="row align-self-center">
     <div class="col-md-4">
-      <input type="text" class="form-control" name="name" placeholder="Product name">
+      <input type="text" class="form-control" name="name" placeholder="Bril naam">
     </div>
     <div class="col-md-4">
       <input type="text" class="form-control" name="brand" placeholder="Brand name">
     </div>
     <div class="col-md-4">
-      <input type="file" class="form-control" name="pic" placeholder="Picture">
+      <input type="text" class="form-control" name="specification" placeholder="Beschrijving">
     </div>
     <div class="col-md-4">
-      <input type="text" class="form-control" name="description" placeholder="Description">
+      <input type="file" class="form-control" name="pic" placeholder="Picture">
     </div>
     <div class="col-md-4">
       <input type="text" class="form-control" name="price" placeholder="Prijs">
@@ -30,7 +30,7 @@ include_once "view/header.php";
       </select>
     </div>
     <div class="col-md-4">
-      <input type="text" class="form-control" name="salePercent" placeholder="First name">
+      <input type="text" class="form-control" name="salePercent" placeholder="Kortingpercentage">
     </div>
   </div>
   <button type="submit" class="btn btn-primary" style="margin-top:20px;">Submit</button>

@@ -18,6 +18,9 @@ class Controller {
           break;
           case 'insertProducts':
             $this->collectInsertFormProducts();
+          break; 
+          case 'addProduct':
+            $this->collectCreateProduct();
           break;
           default:
             $this->collectReadProducts();
@@ -27,7 +30,11 @@ class Controller {
         throw $e;
       }
     }
-  public function collectCreateProduct() {}
+  public function collectCreateProduct() {
+    $content = $this->ProductLogic->createProduct($_POST);
+    var_dump($content[1]);
+    // include_once 'view/main.php';
+  }
 
   public function collectInsertFormProducts() {
     $content = $this->ProductLogic->insertFormProducts();
