@@ -5,10 +5,10 @@ include_once "view/header.php";
 <form action="?op=addProduct" method="post" style="margin:50px;" >
   <div class="row align-self-center">
     <div class="col-md-4">
-      <input type="text" class="form-control" name="name" placeholder="First name">
+      <input type="text" class="form-control" name="name" placeholder="Product name">
     </div>
     <div class="col-md-4">
-      <input type="text" class="form-control" name="brand" placeholder="Last name">
+      <input type="text" class="form-control" name="brand" placeholder="Brand name">
     </div>
     <div class="col-md-4">
       <input type="file" class="form-control" name="pic" placeholder="Picture">
