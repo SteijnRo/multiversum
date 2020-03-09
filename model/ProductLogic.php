@@ -68,7 +68,7 @@ class ProductLogic {
     $footer = $this->readFooter();
     try {
       // nothing as of yet
-      $content = array($header, "", $footer);
+      $content = array('header' => $header, 'result' => "", 'footer' => $footer);
       return $content;
     } catch (Exception $e) {
       throw $e;
