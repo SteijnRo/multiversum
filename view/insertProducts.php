@@ -1,8 +1,12 @@
 <?php
 include_once "view/header.php";
+
+if ($content[1] != "") {
+  echo "<h1>Toegevoegd</h1>";
+}
 ?>
 <div class="album py-5" id="insertForm">
-  <form action="?op=addProduct" method="post" style="margin:50px;">
+    <form action="?op=addProduct" method="POST" style="margin:50px;" enctype='multipart/form-data'>
     <div class="row d-flex justify-content-center">
     <div class="col-md-7">
       <div class="col-md-8">
