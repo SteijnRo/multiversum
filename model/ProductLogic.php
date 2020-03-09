@@ -106,9 +106,28 @@ class ProductLogic {
   }
   
   public function readContacts(){
+    $header = $this->readHeader();
+    $footer = $this->readFooter();
+    $businesshours = $this->readBusinessHours();
     try {
-      
+      // $result= array();
+      echo "you gay";
+      $content = array($header,$businesshours,$footer);
+      return $content;
     } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
+  public function readBusinessHours() {
+    try {
+    $qry = "SELECT id, weekDay, openH, closeH ";
+    $qry .= "FROM buisnesshours ";
+    $res = $this->DataHandler->readsData($qry);
+    $result = $res->fetchAll();
+    // var_dump($result);
+    return $result;
+    }catch (Exception $e) {
       throw $e;
     }
   }

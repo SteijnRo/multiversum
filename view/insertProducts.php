@@ -1,7 +1,7 @@
 <?php
 include_once "view/header.php";
 ?>
-<div class="album py-5" id="main">
+<div class="album py-5" id="insertForm">
   <form action="?op=addProduct" method="post" style="margin:50px;">
     <div class="row d-flex justify-content-center">
     <div class="col-md-7">

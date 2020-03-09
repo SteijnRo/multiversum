@@ -61,6 +61,12 @@ html, body {
 /* standard button style end */
 
 
-#main {
+#insertForm {
     background-color: rgb(27, 50, 73);
+}
+
+
+.business-hours {
+    margin-top: 100px;
+    color: white;
 }
