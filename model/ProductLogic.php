@@ -59,8 +59,12 @@ class ProductLogic {
     }
   }
   
-  public function readContact(){
-    try {}
+  public function readContacts(){
+    try {
+      
+    }catch (Exception $e) {
+      throw $e;
+    }
   }
 }
 

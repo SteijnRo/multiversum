@@ -32,7 +32,7 @@ class Controller {
   }
 
   public function collectReadContacts() {
-    $contact = $this->ProductLogic->readContact();
+    $content = $this->ProductLogic->readContacts();
     include_once 'view/contact.php';
   }
 
