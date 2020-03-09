@@ -58,6 +58,10 @@ class ProductLogic {
       throw $e;
     }
   }
+  
+  public function readContact(){
+    try {}
+  }
 }
 
 ?>

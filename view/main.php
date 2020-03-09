@@ -1,6 +1,4 @@
 <?php
-$img = "http://www.w3.org/2000/svg";
-$description = "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.";
 // pagination
 $productsPerPage = 10;
 $page = 1;
@@ -28,7 +26,7 @@ $products = $content[1];
       echo '
       <div class="col-md-4">
         <div class="card w-75">
-          <a href="#"><img class="card-img-top" src="./assets/media/' . $products[$startProducts]["pic"] . '" alt="pic"></a>
+          <a href="#"><img class="card-img-top" src="./view/assets/media/' . $products[$startProducts]["pic"] . '" alt="pic"></a>
           <div class="card-body">
             <h4 class="card-title">
               <a href="#">' . $products[$startProducts]["name"] . '</a>

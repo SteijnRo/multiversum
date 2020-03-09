@@ -31,6 +31,11 @@ class Controller {
     include_once 'view/main.php';
   }
 
+  public function collectReadContacts() {
+    $contact = $this->ProductLogic->readContact();
+    include_once 'view/contact.php';
+  }
+
   public function collectReadProduct($id){
     $product = $this->ProductLogic->readProduct($id);
     include_once 'view/read.php';
