@@ -10,7 +10,7 @@ class ProductLogic {
     try {
       $header = $this->readHeader();
       $footer = $this->readFooter();
-      $content = array($header, "", $footer);
+      $content = array('header' => $header, 'result' => "", 'footer' => $footer);
       if (!isset($data["name"]) || !isset($data["brand"]) || !isset($data["specification"]) || !isset($files["pic"]) || !isset($data["price"]) || !isset($data["qty"]) || !isset($data["sale"]) || !isset($data["salePercent"])) {
         return $content;
       }
@@ -23,8 +23,8 @@ class ProductLogic {
       $sql = 'INSERT INTO products (name, brand, specification, pic, price, qty, sale, salePercent) ';
       $sql .= 'VALUES("'.$data["name"].'", "'.$data["brand"].'", "'.$data["specification"].'", "'.$files["pic"]["name"].'", '.$data["price"].', '.$data["qty"].', '.$data["sale"].', '.$data["salePercent"].') ';
       // INSERT INTO products (name, brand, specification, pic, price, qty, sale, salePercent) VALUES("test", "samsung", "yes", "stonks.jpg", 123, 1, 0, 0);
-      $result = $this->DataHandler->createData($sql);
-      $content = array($header, $result, $footer);
+      $results = $this->DataHandler->createData($sql);
+      $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
       return $content;
     } catch (Exception $e) {
       throw $e;
@@ -50,7 +50,7 @@ class ProductLogic {
       $res = $this->DataHandler->readsData($qry);
       $results = $res->fetchAll();
 
-      $content = array($header, $results, $footer);
+      $content = array( 'header' => $header, 'result' => $results, 'footer' => $footer);
       return $content;
     } catch (Exception $e) {
       throw $e;
@@ -145,9 +145,12 @@ class ProductLogic {
     $footer = $this->readFooter();
     $businesshours = $this->readBusinessHours();
     try {
+      $qry = "SELECT * ";
+      $qry .= "FROM contact ";
+      $res = $this->DataHandler->readsData($qry);
+      $result = $res->fetchAll();
       // $result= array();
-      echo "you gay";
-      $content = array($header,$businesshours,$footer);
+      $content = array('header' => $header, 'result' => $result, 'businesshours' => $businesshours, 'footer' =>$footer);
       return $content;
     } catch (Exception $e) {
       throw $e;

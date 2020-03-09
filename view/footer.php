@@ -2,7 +2,7 @@
   <div class="container">
     <ul class="list-inline mx-auto justify-content-center">
       <?php
-      $footer = $content[2];
+      $footer = $content['footer'];
       for ($i=0; $i <count($footer) ; $i++) { 
         echo "<li class=\"nav-item\">
         <a class=\"nav-link\"  href=\"" . $footer[$i]['link'] . "\">". $footer[$i]['name']."</a>

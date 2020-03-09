@@ -1,7 +1,7 @@
 <?php
 include_once "view/header.php";
 
-if ($content[1] != "") {
+if ($content['result'] != "") {
   echo "<h1>Toegevoegd</h1>";
 }
 ?>

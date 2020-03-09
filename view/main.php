@@ -13,7 +13,7 @@ $startProducts = $page * $productsPerPage - 10;
 $startProductsCount = $startProducts + 10;
 
 include 'view/header.php';
-$products = $content[1];
+$products = $content['result'];
 ?>
 <div class="album py-5" id="main">
     <div class="container">
