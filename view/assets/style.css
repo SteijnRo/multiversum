@@ -59,3 +59,8 @@ html, body {
     box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
 }
 /* standard button style end */
+
+
+#main {
+    background-color: rgb(27, 50, 73);
+}
