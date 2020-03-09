@@ -42,9 +42,21 @@ include 'view/header.php';
     </iframe>
 </div>
 
-    <!-- </div> -->
-    <!-- AIzaSyAwupTiz9gVsP1FPO9WEnpwM9wV5DYJi0I -->
+    </div>
 
+    <form action="?op=sendEmail" method="post">
+        <input type="text" name="email" placeholder="E-mail adres"><br>
+        <input type="text" name="msg" placeholder="Bericht"><br>
+        <input type="submit">
+    </form>
+
+    <!-- AIzaSyAwupTiz9gVsP1FPO9WEnpwM9wV5DYJi0I -->
+    <iframe
+  width="450"
+  height="250"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/search?key=AIzaSyAwupTiz9gVsP1FPO9WEnpwM9wV5DYJi0I&q=1861+Jan+Pieterszoon+Coenstraat" allowfullscreen>
+</iframe>
    <?php
 include './view/footer.php'; 
 ?>
