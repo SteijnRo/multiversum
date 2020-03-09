@@ -73,7 +73,7 @@ class ProductLogic {
   
   public function readContacts(){
     try {
-
+      
     }catch (Exception $e) {
       throw $e;
     }
