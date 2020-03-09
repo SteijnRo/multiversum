@@ -19,7 +19,13 @@ include 'view/header.php';
 
     </div>
     <!-- AIzaSyAwupTiz9gVsP1FPO9WEnpwM9wV5DYJi0I -->
-    <a href="https://www.google.com/maps/place/Jan+Pieterszoon+Coenstraat+1861/"><img src="https://maps.googleapis.com/maps/api/staticmap?center=Jan+Pieterszoon+Coenstraat+1861&zoom=19&scale=1&size=600x300&maptype=roadmap&key=AIzaSyAwupTiz9gVsP1FPO9WEnpwM9wV5DYJi0I&format=png&visual_refresh=true&markers=size:small%7Ccolor:0xff0000%7Clabel:1%7CJan+Pieterszoon+Coenstraat" alt="Google Map of Jan Pieterszoon Coenstraat 1861"></a>
-<?php
+
+    <iframe
+  width="450"
+  height="250"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/search?key=AIzaSyAwupTiz9gVsP1FPO9WEnpwM9wV5DYJi0I&q=1861+Jan+Pieterszoon+Coenstraat" allowfullscreen>
+</iframe>
+   <?php
 include './view/footer.php'; 
 ?>

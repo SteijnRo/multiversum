@@ -22,7 +22,7 @@ if ($content[1] != "") {
         <br>
       </div>
       <div class="col-md-8">
-        <input type="text" class="form-control" name="description" placeholder="Description">
+        <input type="text" class="form-control" name="specification" placeholder="Description">
         <br>
       </div>
       <div class="col-md-8">
