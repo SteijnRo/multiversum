@@ -21,7 +21,7 @@ echo '
         <div class="col-md-4">
           <h3 class="my-3">Product Description</h3>
           <p>' . $product[0]["specification"] . '</p>
-          <p>Prijs €' . $product[0]["price"] . ',-</p>
+          <p>Prijs €' . $product[0]["price"] . '</p>
           <i class="fas fa-shopping-cart"></i>
         </div>
       </div>
