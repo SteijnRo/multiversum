@@ -6,7 +6,7 @@ include 'view/header.php';
 <div class="container">
     <div class="row d-flex justify-content-center business-hours">
         <div class="col-sm-4">
-        <h2 class="title">Opening Hours</h2>
+        <h2 class="title">Openingstijden</h2>
         <ul class="list-unstyled opening-hours">
             <?php
             for ($i=0; $i < count($content['businesshours']); $i++) { 
@@ -33,7 +33,12 @@ include 'view/header.php';
             ?>
         </ul>
     </div>
-    
+<div class="input-group col-sm-4">
+
+  <input type="text" name="email" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="basic-addon1">
+  <input type="text" name="msg" class="form-control" placeholder="Bericht" aria-label="Bericht" aria-describedby="basic-addon1">
+  <input  class="form-control" type="submit" value="Verzend">
+</div>
     <iframe
         width="450" 
         height="250"
@@ -41,22 +46,17 @@ include 'view/header.php';
         src="https://www.google.com/maps/embed/v1/search?key=AIzaSyAwupTiz9gVsP1FPO9WEnpwM9wV5DYJi0I&q=1861+Jan+Pieterszoon+Coenstraat" allowfullscreen>
     </iframe>
 </div>
+</div>
 
-    </div>
 
-    <form action="?op=sendEmail" method="post">
-        <input type="text" name="email" placeholder="E-mail adres"><br>
-        <input type="text" name="msg" placeholder="Bericht"><br>
-        <input type="submit">
-    </form>
 
     <!-- AIzaSyAwupTiz9gVsP1FPO9WEnpwM9wV5DYJi0I -->
-    <iframe
+    <!-- <iframe
   width="450"
   height="250"
   frameborder="0" style="border:0"
   src="https://www.google.com/maps/embed/v1/search?key=AIzaSyAwupTiz9gVsP1FPO9WEnpwM9wV5DYJi0I&q=1861+Jan+Pieterszoon+Coenstraat" allowfullscreen>
-</iframe>
+</iframe> -->
    <?php
 include './view/footer.php'; 
 ?>

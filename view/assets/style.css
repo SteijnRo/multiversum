@@ -1,4 +1,5 @@
 html, body {
+    width: 99%;
     max-height: 100%;
     max-width: 100%;
     background: #2C3E50;
@@ -72,25 +73,7 @@ html, body {
 }
 
 /* garbage */
-
-.details-container {
-    display: flex;
-    width: 80%;
-    background: #ffffff;
-    justify-content: center;
-    margin: 0 auto;
+#ProductDetails {
+    color: white;
     margin-top: 100px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-}
-
-.left-column {
-    width: 60%;
-}
-
-.details-img {
-    margin: 0;
-    padding: 0;
-    float: left;
 }
