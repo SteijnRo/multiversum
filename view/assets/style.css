@@ -3,12 +3,22 @@ html, body {
     max-height: 100%;
     max-width: 100%;
     background: #2C3E50;
+    /* background: #eaeaea; */
 }
 
 .container {
     display: contents;
 }
 
+#logo{
+    height: 40px;
+    margin-right: 16px;
+}
+/* 
+.logoText {
+    display: inline;
+    font-size: 12px; 
+} */
 /* footer start */
 #footer{ 
     /* margin: 5rem; */

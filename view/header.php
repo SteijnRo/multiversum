@@ -12,7 +12,10 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md  fixed-top" id="navbar">
-  <a class="navbar-brand" href="#">Multiverse</a>
+  <div class="logoText">
+    <img class="img-fluid" id="logo"  src="./view/assets/media/logo.png" .  alt=""><br>
+    <!-- <small>Multiversum</small> -->
+  </div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
