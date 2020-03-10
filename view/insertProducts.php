@@ -42,7 +42,7 @@ if ($content['result'] != "") {
       </div>
       <div class="col-md-8">
         <br>
-        <input type="text" class="form-control" name="salePercent" placeholder="Sales Percentage">
+        <input type="text" class="form-control" name="salePercent" placeholder="Percentage korting">
       </div>
       <div class="col-md-5">
       <button type="submit" class="btn btn-primary" style="margin-top:20px;">Submit</button>

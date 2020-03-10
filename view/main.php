@@ -26,7 +26,11 @@ $products = $content['result'];
         echo '
         <div class="col-md-4">
           <div class="card w-75">
-            <a href="?op=details&id=' . $products[$startProducts]["id"] . '"><img class="card-img-top" src="./view/assets/media/' . $products[$startProducts]["pic"] . '" alt="pic" height="300px"></a>
+            <div class="card-img-outer">
+              <div class="card-img">
+                <a href="?op=details&id=' . $products[$startProducts]["id"] . '"><img class="card-img-top" id="product-img" src="./view/assets/media/' . $products[$startProducts]["pic"] . '" alt="pic" height="300px"></a>
+              </div>
+            </div>
             <div class="card-body">
               <h4 class="card-title">
                 <a href="?op=details&id=' . $products[$startProducts]["id"] . '">' . $products[$startProducts]["name"] . '</a>

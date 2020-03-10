@@ -17,3 +17,6 @@ do {
 function name() {
     // code
 }
+
+class = PascalCase
+functions & variables = camelCase

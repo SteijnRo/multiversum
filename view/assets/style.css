@@ -46,11 +46,21 @@ html, body {
 }
 /* navbar end */
 
-
 /* cards element start */
 .card {
     margin: 50px;
-    width: 300px;
+    width: 100%;
+}
+.card-img-outer {
+    height: 100%;
+    overflow: hidden;
+}
+.card-img {
+    transform: scale(1.25);
+    height: 300px;
+}
+#product-img {
+    object-fit: cover;
 }
 /* cards element end */
 
