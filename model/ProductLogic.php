@@ -38,10 +38,14 @@ class ProductLogic {
   }
   public function readProduct($id) { 
     try {
-      $sql = "SELECT * FROM products WHERE id = $id";
+      $header = $this->readHeader();
+      $footer = $this->readFooter();
+      $sql = "SELECT * FROM products ";
+      $sql .= "WHERE id = $id ";
       $res = $this->DataHandler->readsData($sql);
       $results = $res->fetchAll();
-      return $results;
+      $content = array("header"=>$header, "result"=>$results, "footer"=>$footer);
+      return $content;
     } catch (Exception $e) {
       throw $e;
     }
@@ -105,9 +109,6 @@ class ProductLogic {
     foreach ($array as $key => $value) {
       if (empty($value) && $value != 0) {
         $return = false;
-        echo "kanker";
-        var_dump($value);
-        echo $key;
       }
     }
     return $return;

@@ -70,3 +70,27 @@ html, body {
     margin-top: 100px;
     color: white;
 }
+
+/* garbage */
+
+.details-container {
+    display: flex;
+    width: 80%;
+    background: #ffffff;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 100px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+}
+
+.left-column {
+    width: 60%;
+}
+
+.details-img {
+    margin: 0;
+    padding: 0;
+    float: left;
+}
