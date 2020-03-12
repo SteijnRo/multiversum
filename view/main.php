@@ -15,6 +15,12 @@ $startProductsCount = $startProducts + 10;
 include 'view/header.php';
 $products = $content['result'];
 ?>
+  <div class="row justify-content-center " id="banner">
+    <div class="col-md-12 ">
+      <img src="view/assets/media/banner2.png" class="img-fluid" alt="Responsive image">
+    </div>
+  </div>
+
 <div class="album py-5" id="main">
     <div class="container">
       <?php
