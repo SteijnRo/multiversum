@@ -33,12 +33,13 @@ include 'view/header.php';
             ?>
         </ul>
     </div>
-<div class="input-group col-sm-4">
+<!-- <div class="input-group col-sm-4">
 
   <input type="text" name="email" class="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="basic-addon1">
   <input type="text" name="msg" class="form-control" placeholder="Bericht" aria-label="Bericht" aria-describedby="basic-addon1">
   <input  class="form-control" type="submit" value="Verzend">
-</div>
+</div> -->
+    
     <iframe
         width="450" 
         height="250"
@@ -47,7 +48,50 @@ include 'view/header.php';
     </iframe>
 </div>
 </div>
-
+<div class="container justify-content-center" id="contact">
+	<div class="row">
+      <div class="col-md-6 offset-4">
+        <div class="well well-sm">
+          <form class="form-horizontal" action="" method="post">
+          <fieldset>
+            <legend class="text-left">Contacteer ons</legend>
+            <!-- Name input-->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="name">naam</label>
+              <div class="col-md-9">
+                <input id="name" name="name" type="text" placeholder="Your name" class="form-control">
+              </div>
+            </div>
+    
+            <!-- Email input-->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="email">E-mail</label>
+              <div class="col-md-9">
+                <input id="email" name="email" type="text" placeholder="Your email" class="form-control">
+              </div>
+            </div>
+    
+            <!-- Message body -->
+            <div class="form-group">
+              <label class="col-md-3 control-label" for="message"> Uw Bericht </label>
+              <div class="col-md-9">
+                <textarea class="form-control" id="message" name="msg" placeholder="Schrijf uw bericht hier..." rows="5"></textarea>
+              </div>
+            </div>
+    
+            <!-- Form actions -->
+            <div class="form-group">
+              <div class="col-md-1 text-right">
+                <button type="submit" class="btn btn-primary btn-lg">Verzend</button>
+              </div>
+            </div>
+            <br><br>
+          </fieldset>
+          </form>
+        </div>
+      </div>
+	</div>
+</div>
 
 
     <!-- AIzaSyAwupTiz9gVsP1FPO9WEnpwM9wV5DYJi0I -->

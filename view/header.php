@@ -11,12 +11,12 @@
     <link rel="stylesheet" href="view/assets/style.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-md  fixed-top" id="navbar">
+<nav class="navbar navbar-expand-md  fixed-top navbar-custom" id="navbar">
   <div class="logoText">
-    <img class="img-fluid" id="logo"  src="./view/assets/media/logo.png" .  alt=""><br>
+    <img class="img-fluid" id="logo"  src="./view/assets/media/logo2.svg" .  alt=""><br>
     <!-- <small>Multiversum</small> -->
   </div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button-danger" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 

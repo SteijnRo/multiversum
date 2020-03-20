@@ -54,7 +54,7 @@ class ProductLogic {
     $header = $this->readHeader();
     $footer = $this->readFooter();
     try {
-      $qry = "SELECT id, name, brand, specification, pic, price, qty, sale, salePercent ";
+      $qry = "SELECT * ";
       $qry .= "FROM products ";
       // SELECT id, name, brand, specification, pic, price, qty, sale, salePercent FROM products;
       $res = $this->DataHandler->readsData($qry);
@@ -203,7 +203,7 @@ class ProductLogic {
   public function readBusinessHours() {
     try {
     $qry = "SELECT id, weekDay, openH, closeH ";
-    $qry .= "FROM buisnesshours ";
+    $qry .= "FROM businesshours ";
     $res = $this->DataHandler->readsData($qry);
     $result = $res->fetchAll();
     // var_dump($result);

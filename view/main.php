@@ -15,12 +15,20 @@ $startProductsCount = $startProducts + 10;
 include 'view/header.php';
 $products = $content['result'];
 ?>
-  <div class="row justify-content-center " id="banner">
+  <!-- <div class="row justify-content-center " id="banner">
     <div class="col-md-12 ">
       <img src="view/assets/media/banner2.png" class="img-fluid" alt="Responsive image">
     </div>
+  </div> -->
+  <div class="row justify-content-center " id="banner">
+    <div class="col-md-12 ">
+      <img src="view/assets/media/banner3.png" class="img-fluid" alt="Responsive image">
+      <div class="col-md-4 offset-8">
+     <h3>Multiversum, De VR brillen winkel</h3>
+      <p>Vind alle Vr-brillen die wij in de winkel/webshop verkoepn.  Zoek hier specificaties op van de Vr-Brill en bestel hem hier of kom even langs bij de winkel!</p>
+    </div>
+    </div>
   </div>
-
 <div class="album py-5" id="main">
     <div class="container">
       <?php

@@ -29,3 +29,4 @@ CREATE TABLE buisnessHours  (
     openH varchar(255),
     closeH varchar(255)
 )
+
