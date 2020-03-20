@@ -15,11 +15,20 @@ $startProductsCount = $startProducts + 10;
 include 'view/header.php';
 $products = $content['result'];
 ?>
-  <!-- <div class="row justify-content-center " id="banner">
-    <div class="col-md-12 ">
-      <img src="view/assets/media/banner2.png" class="img-fluid" alt="Responsive image">
+<!-- <div class="row">
+    <div class="col-xs-12 hidden-sm hidden-md hidden-lg">  
+        <img class="img-responsive" src="layouts/layouts.PNG" />    
     </div>
-  </div> -->
+    <div class="hidden-xs col-sm-12 hidden-md hidden-lg">
+        <img class="img-responsive" src="layouts/05.png" />   
+    </div>
+    <div class="hidden-xs hidden-sm col-md-12 hidden-lg">
+        <img class="img-responsive" src="layouts/06.png" />   
+    </div>
+    <div class="hidden-xs hidden-sm hidden-md col-lg-12">
+        <img class="img-responsive" src="layouts/Layout_100.png" /> 
+    </div>
+</div> -->
   <div class="row justify-content-center " id="banner">
     <div class="col-md-12 ">
       <img src="view/assets/media/banner3.png" class="img-fluid" alt="Responsive image">

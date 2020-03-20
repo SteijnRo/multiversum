@@ -52,7 +52,7 @@ include 'view/header.php';
 	<div class="row">
       <div class="col-md-6 offset-4">
         <div class="well well-sm">
-          <form class="form-horizontal" action="" method="post">
+          <form class="form-horizontal" action="?op=sendEmail" method="post">
           <fieldset>
             <legend class="text-left">Contacteer ons</legend>
             <!-- Name input-->
