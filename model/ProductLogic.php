@@ -26,7 +26,7 @@ class ProductLogic {
       if (!$this->uploadFile($data, $files)) {
         return $content;
       }
-      $sql = 'INSERT INTO products (name, brand, specification, pic, price, qty, sale, salePercent) ';
+      $sql = 'INSERT INTO products (name, brand, description, pic, price, qty, sale, salePercent) ';
       $sql .= 'VALUES("'.$data["name"].'", "'.$data["brand"].'", "'.$data["specification"].'", "'.$files["pic"]["name"].'", '.$data["price"].', '.$data["qty"].', '.$data["sale"].', '.$data["salePercent"].') ';
       // INSERT INTO products (name, brand, specification, pic, price, qty, sale, salePercent) VALUES("test", "samsung", "yes", "stonks.jpg", 123, 1, 0, 0);
       $results = $this->DataHandler->createData($sql);
@@ -79,7 +79,30 @@ class ProductLogic {
     }
   }
 
-  public function updateContact() { }
+  public function updateGoggle($data) {
+    try {
+      foreach ($data as $key => $value) {
+        if ($data[$key] == "") {
+          $data[$key] = "-";
+        }
+      }
+      if (isset($files)) {
+        if (isset($data["pic"]) || $data["pic"] !== "-") {
+          $this->uploadFile($data, $files);
+          $sql = 'UPDATE products ';
+          $sql .= 'SET (name="' . $data["name"] . '", brand="' . $data["brand"] . '", description="' . $data["description"] . '", pic="' . $data["pic"] . '", price="' . $data["price"] . '", platform="' . $data["platform"] . '", resolution="' . $data["resolution"] . '", refreshRate="' . $data["refreshRate"] . '", functions="' . $data["functions"] . '", physicalConnections="' . $data["physicalConnections"] . '", fov="' . $data["fov"] . '", accesories="' . $data["accesories"] . '", insurance="' . $data["insurance"] . '", special="' . $data["special"] . '", qty="' . $data["qty"] . '", sale="' . $data["sale"] . '", salePercent="' . $data["salePercent"] . '", EAN="' . $data["EAN"] . '", SKU="' . $data["SKU"] . '") ';
+          $sql .= 'WHERE id = ' . $data["id"];
+        }
+      } else {
+        $sql = 'UPDATE products ';
+        $sql .= 'SET name="' . $data["name"] . '", brand="' . $data["brand"] . '", description="' . $data["description"] . '", price="' . $data["price"] . '", platform="' . $data["platform"] . '", resolution="' . $data["resolution"] . '", refreshRate="' . $data["refreshRate"] . '", functions="' . $data["functions"] . '", physicalConnections="' . $data["physicalConnections"] . '", fov="' . $data["fov"] . '", accesories="' . $data["accesories"] . '", insurance="' . $data["insurance"] . '", special="' . $data["special"] . '", qty="' . $data["qty"] . '", sale="' . $data["sale"] . '", salePercent="' . $data["salePercent"] . '", EAN="' . $data["EAN"] . '", SKU="' . $data["SKU"] . '" ';
+      }
+      $results = $this->DataHandler->updateData($sql);
+      return $results;
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
   public function deleteContact() { }
 
   public function readHeader(){
@@ -169,7 +192,7 @@ class ProductLogic {
         // Recipients
         $mailer->setFrom("devmailsr@gmail.com", "Dev email");
         $mailer->addAddress("stro2002@hotmail.nl");
-        $mailer->addReplyTo($mail);
+        $mailer->addCC($mail);
 
         // content
         $mailer->isHTML(TRUE);

@@ -50,7 +50,7 @@ $products = $content['result'];
                 <a href="?op=details&id=' . $products[$startProducts]["id"] . '">' . $products[$startProducts]["name"] . '</a>
               </h4>
               <h5>€' . $products[$startProducts]["price"] . '</h5>
-              <p class="card-text">' . $products[$startProducts]["specification"] . '</p>
+              <p class="card-text">' . $products[$startProducts]["description"] . '</p>
             </div>
           </div>
         </div>

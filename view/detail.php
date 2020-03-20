@@ -20,14 +20,51 @@ echo '
 
         <div class="col-md-4">
           <h3 class="my-3">Product Description</h3>
-          <p>' . $product[0]["specification"] . '</p>
-          <p>Prijs €' . $product[0]["price"] . '</p>
-          <i class="fas fa-shopping-cart"></i>
+          <p>' . $product[0]["description"] . '</p>
+        </div>
+        <div class="row description">
+          <div class="col-md-5">
+            <p>Prijs:<br> €' . $product[0]["price"] . '</p>
+          </div>
+          <div class="col-md-5">
+            <p>Platform:<br> ' . $product[0]["platform"] . '</p>
+          </div>
+          <div class="col-md-5">
+            <p>Resolutie:<br> ' . $product[0]["resolution"] . '</p>
+          </div>
+          <div class="col-md-5">
+            <p>Refresh rate:<br> ' . $product[0]["refreshRate"] . '</p>
+          </div>
+          <div class="col-md-5">
+            <p>Functies (VR-bril):<br> ' . $product[0]["functions"] . '</p>
+          </div>
+          <div class="col-md-5">
+            <p>Aansluitingen VR-bril:<br> ' . $product[0]["physicalConnections"] . '</p>
+          </div>
+          <div class="col-md-5">
+            <p>Gezichtsveld:<br> ' . $product[0]["fov"] . '°</p>
+          </div>
+          <div class="col-md-5">
+            <p>Accessoires:<br> ' . $product[0]["accesories"] . '</p>
+          </div>
+          <div class="col-md-5">
+            <p>Fabrieksgarantie:<br> ' . $product[0]["insurance"] . '</p>
+          </div>
+          <div class="col-md-5">
+            <p>Bijzonderheden:<br> ' . $product[0]["special"] . '</p>
+          </div>
+          <div class="col-md-5">
+            <p>EAN:<br> ' . $product[0]["EAN"] . '</p>
+          </div>
+          <div class="col-md-5">
+            <p>SKU:<br> ' . $product[0]["SKU"] . '</p>
+          </div>
         </div>
       </div>
     </div>
-  ';
-  ?>
+  </div>
+';
+?>
 
 
 <?php include 'view/footer.php'; ?>

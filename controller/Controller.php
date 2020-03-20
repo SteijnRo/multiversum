@@ -25,6 +25,12 @@ class Controller {
           case 'addProduct':
             $this->collectCreateProduct();
           break;
+          case 'updateGoggleForm':
+            $this->collectReadProductUpdate($_GET["id"]);
+          break;
+          case 'updateGoggle':
+            $this->collectUpdateGoggle($_POST, $_FILES);
+          break;
           case 'sendEmail':
             $this->collectSendEmail($_POST);
           break;
@@ -59,6 +65,16 @@ class Controller {
   public function collectReadProduct($id) {
     $content = $this->ProductLogic->readProduct($id);
     include_once 'view/detail.php';
+  }
+
+  public function collectReadProductUpdate($id) {
+    $content = $this->ProductLogic->readProduct($id);
+    include_once 'view/updateGoggle.php';
+  }
+
+  public function collectUpdateGoggle($data, $files) {
+    print_r($data);
+    var_dump($this->ProductLogic->updateGoggle($data, $files));
   }
 
   public function collectUpdateContact() {}
