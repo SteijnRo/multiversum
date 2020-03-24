@@ -73,7 +73,6 @@ class Controller {
   }
 
   public function collectUpdateGoggle($data, $files) {
-    print_r($data);
     var_dump($this->ProductLogic->updateGoggle($data, $files));
   }
 

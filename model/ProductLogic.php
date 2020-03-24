@@ -17,7 +17,7 @@ class ProductLogic {
       $header = $this->readHeader();
       $footer = $this->readFooter();
       $content = array('header' => $header, 'result' => "", 'footer' => $footer);
-      if (!isset($data["name"]) || !isset($data["brand"]) || !isset($data["specification"]) || !isset($files["pic"]) || !isset($data["price"]) || !isset($data["qty"]) || !isset($data["sale"]) || !isset($data["salePercent"])) {
+      if (!isset($data["name"]) || !isset($data["brand"]) || !isset($data["description"]) || !isset($files["pic"]) || !isset($data["price"]) || !isset($data["qty"]) || !isset($data["sale"]) || !isset($data["salePercent"])) {
         return $content;
       }
       if (!$this->checkData($data)) {
@@ -26,8 +26,8 @@ class ProductLogic {
       if (!$this->uploadFile($data, $files)) {
         return $content;
       }
-      $sql = 'INSERT INTO products (name, brand, description, pic, price, qty, sale, salePercent) ';
-      $sql .= 'VALUES("'.$data["name"].'", "'.$data["brand"].'", "'.$data["specification"].'", "'.$files["pic"]["name"].'", '.$data["price"].', '.$data["qty"].', '.$data["sale"].', '.$data["salePercent"].') ';
+      $sql = 'INSERT INTO products (name, brand, description, pic, price, platform, resolution, refreshRate, functions, physicalConnections, fov, accesories, insurance, special, qty, sale, salePercent, EAN, SKU) ';
+      $sql .= 'VALUES("' . $data["name"] . '", "' . $data["brand"] . '", "' . $data["description"] . '", "' . $files["pic"]["name"] . '", "' . $data["price"] . '", "' . $data["platform"] . '", "' . $data["resolution"] . '", "' . $data["refreshRate"] . '", "' . $data["functions"] . '", "' . $data["physicalConnections"] . '", "' . $data["fov"] . '", "' . $data["accesories"] . '", "' . $data["insurance"] . '", "' . $data["special"] . '", "' . $data["qty"] . '", "' . $data["sale"] . '", "' . $data["salePercent"] . '", "' . $data["EAN"] . '", "' . $data["SKU"] . '") ';
       // INSERT INTO products (name, brand, specification, pic, price, qty, sale, salePercent) VALUES("test", "samsung", "yes", "stonks.jpg", 123, 1, 0, 0);
       $results = $this->DataHandler->createData($sql);
       $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
@@ -79,20 +79,19 @@ class ProductLogic {
     }
   }
 
-  public function updateGoggle($data) {
+  public function updateGoggle($data, $files) {
     try {
       foreach ($data as $key => $value) {
         if ($data[$key] == "") {
           $data[$key] = "-";
         }
       }
-      if (isset($files)) {
-        if (isset($data["pic"]) || $data["pic"] !== "-") {
+      if (isset($files) && !empty($files)) {
           $this->uploadFile($data, $files);
           $sql = 'UPDATE products ';
-          $sql .= 'SET (name="' . $data["name"] . '", brand="' . $data["brand"] . '", description="' . $data["description"] . '", pic="' . $data["pic"] . '", price="' . $data["price"] . '", platform="' . $data["platform"] . '", resolution="' . $data["resolution"] . '", refreshRate="' . $data["refreshRate"] . '", functions="' . $data["functions"] . '", physicalConnections="' . $data["physicalConnections"] . '", fov="' . $data["fov"] . '", accesories="' . $data["accesories"] . '", insurance="' . $data["insurance"] . '", special="' . $data["special"] . '", qty="' . $data["qty"] . '", sale="' . $data["sale"] . '", salePercent="' . $data["salePercent"] . '", EAN="' . $data["EAN"] . '", SKU="' . $data["SKU"] . '") ';
+          //                             name,                          brand,                                description,                         pic,                                  price,                             platform,                               resolution,                                refreshRate,                              functions,                                        physicalConnections,                        fov,                               accesories,                              insurance,                            special,                        qty,                         sale,                                salePercent,                        EAN,                        SKU) 
+          $sql .= 'SET name="' . $data["name"] . '", brand="' . $data["brand"] . '", description="' . $data["description"] . '", pic="' . $files["pic"]["name"] . '", price="' . $data["price"] . '", platform="' . $data["platform"] . '", resolution="' . $data["resolution"] . '", refreshRate="' . $data["refreshRate"] . '", functions="' . $data["functions"] . '", physicalConnections="' . $data["physicalConnections"] . '", fov="' . $data["fov"] . '", accesories="' . $data["accesories"] . '", insurance="' . $data["insurance"] . '", special="' . $data["special"] . '", qty="' . $data["qty"] . '", sale="' . $data["sale"] . '", salePercent="' . $data["salePercent"] . '", EAN="' . $data["EAN"] . '", SKU="' . $data["SKU"] . '" ';
           $sql .= 'WHERE id = ' . $data["id"];
-        }
       } else {
         $sql = 'UPDATE products ';
         $sql .= 'SET name="' . $data["name"] . '", brand="' . $data["brand"] . '", description="' . $data["description"] . '", price="' . $data["price"] . '", platform="' . $data["platform"] . '", resolution="' . $data["resolution"] . '", refreshRate="' . $data["refreshRate"] . '", functions="' . $data["functions"] . '", physicalConnections="' . $data["physicalConnections"] . '", fov="' . $data["fov"] . '", accesories="' . $data["accesories"] . '", insurance="' . $data["insurance"] . '", special="' . $data["special"] . '", qty="' . $data["qty"] . '", sale="' . $data["sale"] . '", salePercent="' . $data["salePercent"] . '", EAN="' . $data["EAN"] . '", SKU="' . $data["SKU"] . '" ';
@@ -152,7 +151,7 @@ class ProductLogic {
     // Check if  file already exists
     if (file_exists($targetFile)) {
       // not uploaded cause file with identical name already exists
-      return false;
+      unlink("view/assets/media/" . $files["pic"]["name"]);
     }
     // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
