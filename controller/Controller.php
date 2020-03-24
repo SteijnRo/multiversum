@@ -34,7 +34,7 @@ class Controller {
           case 'sendEmail':
             $this->collectSendEmail($_POST);
           break;
-          case 'updateContact':
+          case 'updateContactForm':
             $this->collectUpdateContactData($_POST);
           break;
           default:
@@ -79,7 +79,7 @@ class Controller {
     var_dump($this->ProductLogic->updateGoggle($data, $files));
   }
   public function collectUpdateContactData($data) {
-    $this->ProductLogic->readContacts();
+    $content = $this->ProductLogic->readContacts();
     include_once 'view/updateContact.php';
   }
 

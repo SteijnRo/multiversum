@@ -8,11 +8,11 @@ use PHPMailer\PHPMailer\Exception;
 require_once 'model/DataHandler.php';
 
 class ProductLogic {
-  public function __construct() {
+  protected function __construct() {
       $this->DataHandler = new Datahandler("localhost", "mysql", "multiverse", "root", "");
   }
-  public function __destruct() { }
-  public function createProduct($data, $files) {
+  protected function __destruct() { }
+  protected function createProduct($data, $files) {
     try {
       $header = $this->readHeader();
       $footer = $this->readFooter();
@@ -36,7 +36,7 @@ class ProductLogic {
       throw $e;
     }
   }
-  public function readProduct($id) { 
+  protected function readProduct($id) { 
     try {
       $header = $this->readHeader();
       $footer = $this->readFooter();
@@ -50,7 +50,7 @@ class ProductLogic {
       throw $e;
     }
   }
-  public function readProducts() {
+  protected function readProducts() {
     try {
       $header = $this->readHeader();
       $footer = $this->readFooter();
@@ -67,7 +67,7 @@ class ProductLogic {
     }
   }
 
-  public function insertFormProducts() {
+  protected function insertFormProducts() {
     $header = $this->readHeader();
     $footer = $this->readFooter();
     try {
@@ -79,7 +79,7 @@ class ProductLogic {
     }
   }
 
-  public function updateGoggle($data, $files) {
+  protected function updateGoggle($data, $files) {
     try {
       $header = $this->readHeader();
       $footer = $this->readFooter();
@@ -112,9 +112,9 @@ class ProductLogic {
       throw $e;
     }
   }
-  public function deleteContact() { }
+  protected function deleteContact() { }
 
-  public function readHeader(){
+  protected function readHeader(){
     try {
       $sql = 'SELECT * FROM header';
       $res = $this->DataHandler->readsData($sql);
@@ -125,7 +125,7 @@ class ProductLogic {
     }
   }
 
-  public function readFooter(){
+  protected function readFooter(){
     try {
       $sql = 'SELECT * FROM footer';
       $res = $this->DataHandler->readsData($sql);
@@ -136,7 +136,7 @@ class ProductLogic {
     }
   }
 
-  public function checkData($array) {
+  protected function checkData($array) {
     $return = true;
     foreach ($array as $key => $value) {
       if (empty($value) && $value != 0) {
@@ -146,7 +146,7 @@ class ProductLogic {
     return $return;
   }
 
-  public function uploadFile($data, $files) {
+  protected function uploadFile($data, $files) {
     $targetDir = "view/assets/media/";
     $targetFile = $targetDir . basename($files["pic"]["name"]);
     $uploadOk = 1;
@@ -179,7 +179,7 @@ class ProductLogic {
     }
   }
 
-  public function sendEmail($data) {
+  protected function sendEmail($data) {
     $mail = $data["email"];
     $msg = $data["msg"];
     // Load Composer's autoloader
@@ -215,7 +215,7 @@ class ProductLogic {
     }
   }
   
-  public function readContacts(){
+  protected function readContacts(){
     $header = $this->readHeader();
     $footer = $this->readFooter();
     $businesshours = $this->readBusinessHours();
@@ -232,7 +232,7 @@ class ProductLogic {
     }
   }
 
-  public function readBusinessHours() {
+  protected function readBusinessHours() {
     try {
     $qry = "SELECT id, weekDay, openH, closeH ";
     $qry .= "FROM businesshours ";
