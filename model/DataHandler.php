@@ -45,6 +45,10 @@ class DataHandler{
 		$this->query($sql);
 		return $this->rowCount();
 	}
+	public function updateContactData($sql){
+		$this->query($sql);
+		return $this->rowCount();
+	}
 	public function deleteData($sql){
 		$sth = $this->dbh->query($sql);
 		return $sth->rowCount();

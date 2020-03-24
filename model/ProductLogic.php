@@ -50,6 +50,26 @@ class ProductLogic {
       throw $e;
     }
   }
+
+  public function updateContact($data) {
+    try {
+      foreach ($data as $key => $value) {
+        if ($data[$key] == "") {
+          $data[$key] = "-";
+        }
+      }
+      if (isset($data["openH"]) || $data["openH"] !== "-") {
+        $sql = 'UPDATE businesshours ';
+        $sql .= 'SET (openH="' . $data["openH"] . '", closeH="' . $data["closeH"] . '") ';
+        $sql .= 'WHERE id = ' . $data["id"];
+      }
+      $results = $this->DataHandler->updateContactData($sql);
+      return $results;
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
   public function readProducts() {
     $header = $this->readHeader();
     $footer = $this->readFooter();

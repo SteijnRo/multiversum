@@ -59,7 +59,7 @@ include 'view/header.php';
             <div class="form-group">
               <label class="col-md-3 control-label" for="name">naam</label>
               <div class="col-md-9">
-                <input id="name" name="name" type="text" placeholder="Your name" class="form-control">
+                <input id="name" name="name" type="text" placeholder="Uw naam" class="form-control">
               </div>
             </div>
     
@@ -67,7 +67,7 @@ include 'view/header.php';
             <div class="form-group">
               <label class="col-md-3 control-label" for="email">E-mail</label>
               <div class="col-md-9">
-                <input id="email" name="email" type="text" placeholder="Your email" class="form-control">
+                <input id="email" name="email" type="text" placeholder="Uw email" class="form-control">
               </div>
             </div>
     
