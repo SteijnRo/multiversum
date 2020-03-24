@@ -134,3 +134,36 @@ html, body {
 .updateProduct {
     margin-bottom: 20px;
 }
+
+/* responsive header img / content */
+#header-img {
+    height: 350px;
+    width:100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+  } 
+  
+  @media screen and (max-width: 767px) {   
+      #header-img{
+          background-image: url(https://images.pexels.com/photos/2007647/pexels-photo-2007647.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=200&w=1260);
+      } 
+  }
+  
+  @media screen and (min-width: 768px) {      
+      #header-img{      
+          background-image: url(https://images.pexels.com/photos/3861939/pexels-photo-3861939.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=250&w=1260);
+      } 
+  } 
+  @media (min-width: 992px) {      
+        #header-img{        
+            /* background-image: url(https://images.pexels.com/photos/3175979/pexels-photo-3175979.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=400&w=1260); */
+            background-image: url(./media/Untitled.png);
+        } 
+  }
+  @media (min-width: 1200px) {    
+       #header-img{         
+           background-image: url(./media/Untitled2.png);
+           /* background-image: url(https://images.pexels.com/photos/819848/pexels-photo-819848.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=500&w=1260); */
+       } 
+  }

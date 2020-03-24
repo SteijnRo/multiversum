@@ -15,29 +15,22 @@ $startProductsCount = $startProducts + 10;
 include 'view/header.php';
 $products = $content['result'];
 ?>
-<!-- <div class="row">
-    <div class="col-xs-12 hidden-sm hidden-md hidden-lg">  
-        <img class="img-responsive" src="layouts/layouts.PNG" />    
-    </div>
-    <div class="hidden-xs col-sm-12 hidden-md hidden-lg">
-        <img class="img-responsive" src="layouts/05.png" />   
-    </div>
-    <div class="hidden-xs hidden-sm col-md-12 hidden-lg">
-        <img class="img-responsive" src="layouts/06.png" />   
-    </div>
-    <div class="hidden-xs hidden-sm hidden-md col-lg-12">
-        <img class="img-responsive" src="layouts/Layout_100.png" /> 
-    </div>
-</div> -->
-  <div class="row justify-content-center " id="banner">
+<div class="row justify-content-center" id="banner">
+  <div class="container col-md-12" >
+    <div class="img-fluid" id="header-img"></div>
+  </div>
+</div>
+
+  <!-- <div class="row justify-content-center " id="banner">
     <div class="col-md-12 ">
       <img src="view/assets/media/banner3.png" class="img-fluid" alt="Responsive image">
       <div class="col-md-4 offset-8">
-     <h3>Multiversum, De VR brillen winkel</h3>
-      <p>Vind alle Vr-brillen die wij in de winkel/webshop verkoepn.  Zoek hier specificaties op van de Vr-Brill en bestel hem hier of kom even langs bij de winkel!</p>
+        <h3>Multiversum, De VR brillen winkel</h3>
+        <p>Vind alle Vr-brillen die wij in de winkel/webshop verkoepn.  Zoek hier specificaties op van de Vr-Brill en bestel hem hier of kom even langs bij de winkel!</p>
+      </div>
     </div>
-    </div>
-  </div>
+  </div> -->
+
 <div class="album py-5" id="main">
     <div class="container">
       <?php
