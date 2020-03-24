@@ -179,3 +179,7 @@ html, body {
 .card-footer > form {
     float:right;
 }
+
+.orderOverviewTable {
+    width:100%;
+}
