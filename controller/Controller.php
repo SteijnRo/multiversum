@@ -46,6 +46,24 @@ class Controller {
           case 'placeOrder':
             $this->collectCreateOrder();
           break;
+          case 'updateCopyrightForm':
+            $this->collectUpdateCopyrightData($_POST);
+          break;
+          case 'updateCopyright':
+            $this->UpdateCopyright($data);
+          break;
+          case 'privacy':
+            $this->collectReadPrivacy();
+          break;
+          case 'copyright':
+            $this->collectReadCopyright();
+          break;
+          case 'algemenevoorwaarden':
+            $this->collectReadAlgemeneVoorwaarden();
+          break;
+          case 'cookies':
+            $this->collectReadCookies();
+          break;
           default:
             $this->collectReadProducts();
           break;
@@ -74,6 +92,22 @@ class Controller {
     include_once 'view/main.php';
   }
 
+  public function collectReadPrivacy() {
+    $content = $this->ProductLogic->readPrivacyStatement();
+    include_once 'view/privacy.php';
+  }
+  public function collectReadCookies() {
+    $content = $this->ProductLogic->readCookies();
+    include_once 'view/cookies.php';
+  }
+  public function collectReadCopyright() {
+    $content = $this->ProductLogic->readCopyright();
+    include_once 'view/copyright.php';
+  }
+  public function collectReadAlgemeneVoorwaarden() {
+    $content = $this->ProductLogic->readAlgemeneVoorwaarden();
+    include_once 'view/algemeneVoorwaarde.php';
+  }
   public function collectReadContacts() {
     $content = $this->ProductLogic->readContacts();
     include_once 'view/contact.php';
@@ -97,6 +131,11 @@ class Controller {
   public function collectUpdateContactData($data) {
     $content = $this->ProductLogic->readContacts();
     include_once 'view/updateContact.php';
+  }
+  public function collectUpdateCopyrightData($data) {
+    $content = $this->ProductLogic->readCopyright();
+    // $content = $this->ProductLogic->collectReadCopyright();
+    include_once 'view/updateCopyright.php';
   }
 
   public function collectUpdateContact($data) {

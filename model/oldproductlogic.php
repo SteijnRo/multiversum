@@ -36,27 +36,11 @@ class ProductLogic {
       throw $e;
     }
   }
-
-  public function createOrder($data) {
+  protected function readProduct($id) { 
     try {
       $header = $this->readHeader();
       $footer = $this->readFooter();
       $content = array('header' => $header, 'result' => "", 'footer' => $footer);
-
-      if (!isset($data["productIDs"]) || !isset($data["name"]) || !isset($data["adress"]) || !isset($data["city"]) || !isset($data["state"]) || !isset($data["postcode"]) || !isset($data["telNum"]) || !isset($data["email"])) {
-        return "Lege velden tegen gekomen.";
-      }
-      
-      $emailCheck = !preg_replace("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", "", $data["email"]);
-
-      if (!$string) {
-        return "Foutief e-mail adres opgegeven.";
-      }
-
-      foreach ($data as $value) {
-        
-      }
-
       $productIDs = "";
       // foreach ($data["productID"] as $value) {
       //   $productIDs .= $value . "*";
@@ -74,20 +58,20 @@ class ProductLogic {
     }
   }
 
-  public function readProduct($id) { 
-    try {
-      $header = $this->readHeader();
-      $footer = $this->readFooter();
-      $sql = "SELECT * FROM products ";
-      $sql .= "WHERE id = $id ";
-      $res = $this->DataHandler->readsData($sql);
-      $results = $res->fetchAll();
-      $content = array("header"=>$header, "result"=>$results, "footer"=>$footer);
-      return $content;
-    } catch (Exception $e) {
-      throw $e;
-    }
-  }
+  // public function readProduct($id) { 
+  //   try {
+  //     $header = $this->readHeader();
+  //     $footer = $this->readFooter();
+  //     $sql = "SELECT * FROM products ";
+  //     $sql .= "WHERE id = $id ";
+  //     $res = $this->DataHandler->readsData($sql);
+  //     $results = $res->fetchAll();
+  //     $content = array("header"=>$header, "result"=>$results, "footer"=>$footer);
+  //     return $content;
+  //   } catch (Exception $e) {
+  //     throw $e;
+  //   }
+  // }
   public function readProducts() {
     try {
       $header = $this->readHeader();
@@ -104,8 +88,24 @@ class ProductLogic {
       throw $e;
     }
   }
+  public function updateCopyright() { 
+    try {
+      $header = $this->readHeader();
+      $footer = $this->readFooter();
+      $sql = "UPDATE footer ";
+      $sql .= "SET content=\"" . $data["content"] . "\" ";
+      $sql .= "WHERE id = 1 ";
+      $res = $this->DataHandler->readsData($sql);
+      $results = $res->fetchAll();
+      $content = array("header"=>$header, "result"=>$results, "footer"=>$footer);
+      exit;
+      return $content;
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
 
-  public function insertFormProducts() {
+  protected function insertFormProducts() {
     $header = $this->readHeader();
     $footer = $this->readFooter();
     try {
@@ -150,8 +150,9 @@ class ProductLogic {
       throw $e;
     }
   }
+  // protected function deleteContact() { }
 
-  public function updateContacts($data) {
+  protected function readHeader(){
     try {
       $header = $this->readHeader();
       $footer = $this->readFooter();
@@ -321,95 +322,6 @@ class ProductLogic {
     $result = $res->fetchAll();
     // var_dump($result);
     return $result;
-    }catch (Exception $e) {
-      throw $e;
-    }
-  }
-
-  public function updateCopyright() { 
-    try {
-      $header = $this->readHeader();
-      $footer = $this->readFooter();
-      $sql = "UPDATE footer ";
-      $sql .= "SET content=\"" . $data["content"] . "\" ";
-      $sql .= "WHERE id = 1 ";
-      $res = $this->DataHandler->readsData($sql);
-      $results = $res->fetchAll();
-      $content = array("header"=>$header, "result"=>$results, "footer"=>$footer);
-      exit;
-      return $content;
-    } catch (Exception $e) {
-      throw $e;
-    }
-  }
-
-  public function readPrivacyStatement() {
-    try {
-      $header = $this->readHeader();
-      $footer = $this->readFooter();
-      $qry = "SELECT content ";
-      $qry .= "FROM footer ";
-      $qry .= "WHERE id = 3";
-
-      $res = $this->DataHandler->readsData($qry);
-      $results = $res->fetchAll();
-
-      $content = array( 'header' => $header, 'result' => $results, 'footer' => $footer);
-      return $content;
-    }catch (Exception $e) {
-      throw $e;
-    }
-  }
-
-  public function readCopyright() {
-    try {
-      $header = $this->readHeader();
-      $footer = $this->readFooter();
-      $qry = "SELECT content ";
-      $qry .= "FROM footer ";
-      $qry .= "WHERE id = 1";
-
-      $res = $this->DataHandler->readsData($qry);
-      $results = $res->fetchAll();
-
-      $content = array( 'header' => $header, 'result' => $results, 'footer' => $footer);
-      return $content;
-    }catch (Exception $e) {
-      throw $e;
-    }
-  }
-
-  public function readAlgemeneVoorwaarden() {
-    try {
-      $header = $this->readHeader();
-      $footer = $this->readFooter();
-      $qry = "SELECT content ";
-      $qry .= "FROM footer ";
-      $qry .= "WHERE id = 2";
-
-      $res = $this->DataHandler->readsData($qry);
-      $results = $res->fetchAll();
-
-      $content = array( 'header' => $header, 'result' => $results, 'footer' => $footer);
-      return $content;
-    }catch (Exception $e) {
-      throw $e;
-    }
-  }
-
-  public function readCookies() {
-    try {
-      $header = $this->readHeader();
-      $footer = $this->readFooter();
-      $qry = "SELECT content ";
-      $qry .= "FROM footer ";
-      $qry .= "WHERE id = 4";
-
-      $res = $this->DataHandler->readsData($qry);
-      $results = $res->fetchAll();
-
-      $content = array( 'header' => $header, 'result' => $results, 'footer' => $footer);
-      return $content;
     }catch (Exception $e) {
       throw $e;
     }

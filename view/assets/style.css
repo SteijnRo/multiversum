@@ -168,6 +168,13 @@ html, body {
        } 
   }
 
+
+  /* privacy styling */
+  #privacy-statement {
+      margin-top: 80px;
+      color: white;
+  }
+
 /* garbage */
 .card-footer > form {
     float:right;
