@@ -8,11 +8,11 @@ use PHPMailer\PHPMailer\Exception;
 require_once 'model/DataHandler.php';
 
 class ProductLogic {
-  protected function __construct() {
+  public function __construct() {
       $this->DataHandler = new Datahandler("localhost", "mysql", "multiverse", "root", "");
   }
-  protected function __destruct() { }
-  protected function createProduct($data, $files) {
+  public function __destruct() { }
+  public function createProduct($data, $files) {
     try {
       $header = $this->readHeader();
       $footer = $this->readFooter();
@@ -36,7 +36,30 @@ class ProductLogic {
       throw $e;
     }
   }
-  protected function readProduct($id) { 
+
+  public function createOrder($data) {
+    try {
+      $header = $this->readHeader();
+      $footer = $this->readFooter();
+      $content = array('header' => $header, 'result' => "", 'footer' => $footer);
+      $productIDs = "";
+      // foreach ($data["productID"] as $value) {
+      //   $productIDs .= $value . "*";
+      // }
+      // $productIDs = rtrim($productIDs, "*");
+      $productIDs = $data["productID"];
+
+      $sql = 'INSERT INTO orders (productIDs, name, adress, city, state, postcode, telNum, email) ';
+      $sql .= 'VALUES("' . $productIDs . '", "' . trim($data["name"]) . '", "' . trim($data["adress"]) . '", "' . trim($data["city"]) . '", "' . trim($data["state"]) . '", "' . trim($data["postcode"]) . '", "' . trim($data["telNum"]) . '", "' . trim($data["email"]) . '") ';
+      $results = $this->DataHandler->createData($sql);
+      $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
+      return $content;
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
+  public function readProduct($id) { 
     try {
       $header = $this->readHeader();
       $footer = $this->readFooter();
@@ -50,7 +73,7 @@ class ProductLogic {
       throw $e;
     }
   }
-  protected function readProducts() {
+  public function readProducts() {
     try {
       $header = $this->readHeader();
       $footer = $this->readFooter();
@@ -67,7 +90,7 @@ class ProductLogic {
     }
   }
 
-  protected function insertFormProducts() {
+  public function insertFormProducts() {
     $header = $this->readHeader();
     $footer = $this->readFooter();
     try {
@@ -79,7 +102,7 @@ class ProductLogic {
     }
   }
 
-  protected function updateGoggle($data, $files) {
+  public function updateGoggle($data, $files) {
     try {
       $header = $this->readHeader();
       $footer = $this->readFooter();
@@ -112,9 +135,52 @@ class ProductLogic {
       throw $e;
     }
   }
-  protected function deleteContact() { }
 
-  protected function readHeader(){
+  public function updateContacts($data) {
+    try {
+      $header = $this->readHeader();
+      $footer = $this->readFooter();
+      if (empty($data)) {
+        return $content = array('header' => $header, 'result' => "Geen waardes meegegeven", 'footer' => $footer);
+      }
+      foreach ($data as $key => $value) {
+        if ($data[$key] == "") {
+          $data[$key] = "-";
+        }
+      }
+      if ($data["formType"] == "companyHours") {
+        $result = array();
+        for ($i = 0; $i < count($data["businesshours"]); $i++) {
+          $iPlusOne = $i+1;
+          $sql = 'UPDATE businesshours ';
+          $sql .= 'SET openH = "' . $data["businesshours"][$i]["openH"] . '", closeH = "' . $data["businesshours"][$i]["closeH"] . '"';
+          $sql .= 'WHERE id = ' . $iPlusOne;
+          $this->DataHandler->updateData($sql);
+        }
+      } else {
+        $sql = 'UPDATE contact ';
+        $sql .= 'SET kvk = "' . $data["kvk"] . '", BTWNum = "' . $data["BTWNum"] . '", street = "' . $data["street"] . '", city = "' . $data["city"] . '", state = "' . $data["state"] . '", postcode = "' . $data["postcode"] . '"';
+        $sql .= 'WHERE id = 1';
+        $this->DataHandler->updateData($sql);
+      }
+      $formContent = $this->readContacts();
+      $results = $formContent;
+      $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
+      return $content;
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
+  public function readBuyForm() {
+    $header = $this->readHeader();
+    $header = $this->readFooter();
+    return $content = array('header' => $header, 'result' => "", 'footer' => $footer);
+  }
+
+  public function deleteContact() { }
+
+  public function readHeader(){
     try {
       $sql = 'SELECT * FROM header';
       $res = $this->DataHandler->readsData($sql);
@@ -125,7 +191,7 @@ class ProductLogic {
     }
   }
 
-  protected function readFooter(){
+  public function readFooter(){
     try {
       $sql = 'SELECT * FROM footer';
       $res = $this->DataHandler->readsData($sql);
@@ -136,7 +202,7 @@ class ProductLogic {
     }
   }
 
-  protected function checkData($array) {
+  public function checkData($array) {
     $return = true;
     foreach ($array as $key => $value) {
       if (empty($value) && $value != 0) {
@@ -146,7 +212,7 @@ class ProductLogic {
     return $return;
   }
 
-  protected function uploadFile($data, $files) {
+  public function uploadFile($data, $files) {
     $targetDir = "view/assets/media/";
     $targetFile = $targetDir . basename($files["pic"]["name"]);
     $uploadOk = 1;
@@ -179,7 +245,7 @@ class ProductLogic {
     }
   }
 
-  protected function sendEmail($data) {
+  public function sendEmail($data) {
     $mail = $data["email"];
     $msg = $data["msg"];
     // Load Composer's autoloader
@@ -215,7 +281,7 @@ class ProductLogic {
     }
   }
   
-  protected function readContacts(){
+  public function readContacts(){
     $header = $this->readHeader();
     $footer = $this->readFooter();
     $businesshours = $this->readBusinessHours();
@@ -232,7 +298,7 @@ class ProductLogic {
     }
   }
 
-  protected function readBusinessHours() {
+  public function readBusinessHours() {
     try {
     $qry = "SELECT id, weekDay, openH, closeH ";
     $qry .= "FROM businesshours ";

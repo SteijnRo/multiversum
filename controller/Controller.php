@@ -37,6 +37,15 @@ class Controller {
           case 'updateContactForm':
             $this->collectUpdateContactData($_POST);
           break;
+          case 'updateContact':
+            $this->collectUpdateContact($_POST);
+          break;
+          case 'buy':
+            $this->collectReadBuyForm();
+          break;
+          case 'placeOrder':
+            $this->collectCreateOrder();
+          break;
           default:
             $this->collectReadProducts();
           break;
@@ -48,6 +57,11 @@ class Controller {
   public function collectCreateProduct() {
     $content = $this->ProductLogic->createProduct($_POST, $_FILES);
     include_once 'view/insertProducts.php';
+  }
+
+  public function collectCreateOrder() {
+    $content = $this->ProductLogic->createOrder($_POST);
+    include_once 'view/success.php';
   }
 
   public function collectInsertFormProducts() {
@@ -76,11 +90,23 @@ class Controller {
   }
 
   public function collectUpdateGoggle($data, $files) {
-    var_dump($this->ProductLogic->updateGoggle($data, $files));
+    $content = $this->ProductLogic->updateGoggle($data, $files);
+    print_r($content);
   }
+
   public function collectUpdateContactData($data) {
     $content = $this->ProductLogic->readContacts();
     include_once 'view/updateContact.php';
+  }
+
+  public function collectUpdateContact($data) {
+    $content = $this->ProductLogic->updateContacts($data);
+    print_r($content);
+  }
+
+  public function collectReadBuyForm() {
+    // $content = $this->ProductLogic->readBuyForm();
+    include_once 'view/buyForm.php';
   }
 
   public function collectDeleteContact() {}

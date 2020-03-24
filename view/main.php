@@ -21,16 +21,6 @@ $products = $content['result'];
   </div>
 </div>
 
-  <!-- <div class="row justify-content-center " id="banner">
-    <div class="col-md-12 ">
-      <img src="view/assets/media/banner3.png" class="img-fluid" alt="Responsive image">
-      <div class="col-md-4 offset-8">
-        <h3>Multiversum, De VR brillen winkel</h3>
-        <p>Vind alle Vr-brillen die wij in de winkel/webshop verkoepn.  Zoek hier specificaties op van de Vr-Brill en bestel hem hier of kom even langs bij de winkel!</p>
-      </div>
-    </div>
-  </div> -->
-
 <div class="album py-5" id="main">
     <div class="container">
       <?php
@@ -54,13 +44,18 @@ $products = $content['result'];
               <h5>€' . $products[$startProducts]["price"] . '</h5>
               <p class="card-text">' . $products[$startProducts]["description"] . '</p>
             </div>
+            <div class="card-footer">
+              <form action="?op=buy" method="post">
+                <input type="hidden" name="productPrice" value="' . $products[$startProducts]["price"] . '">
+                <input type="hidden" name="productName" value="' . $products[$startProducts]["name"] . '">
+                <input type="hidden" name="productID" value="' . $products[$startProducts]["id"] . '">
+                <input type="submit" value="Koop nu">
+              </form>
+            </div>
           </div>
         </div>
         ';
         // rating
-        // <div class="card-footer">
-        //   <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-        // </div>
       }
       echo '</div>';
       ?>

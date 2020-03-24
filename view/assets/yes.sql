@@ -21,13 +21,24 @@ CREATE TABLE contact (
     city varchar(255),
     state varchar(255),
     postcode varchar(255)
-)
+);
 
 CREATE TABLE buisnessHours  (
     id int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     weekDay varchar(255),
     openH varchar(255),
     closeH varchar(255)
-)
+);
 
 
+CREATE TABLE orders (
+    id int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    productIDs varchar(500),
+    name varchar(255),
+    adress varchar(255),
+    city varchar(255),
+    state varchar(255),
+    postcode varchar(255),
+    telNum int(20),
+    email varchar(255)
+);

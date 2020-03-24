@@ -8,7 +8,6 @@
         <a class=\"nav-link\"  href=\"" . $footer[$i]['link'] . "\">". $footer[$i]['name']."</a>
         </li>";
       }
-
       ?>
       </ul>
   </div>
