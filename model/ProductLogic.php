@@ -91,7 +91,7 @@ class ProductLogic {
           $data[$key] = "-";
         }
       }
-      if (isset($files) && !empty($files)) {
+      if (isset($files) && !empty($files["pic"]["name"])) {
         $resultUpload = $this->uploadFile($data, $files);
           if ($resultUpload !== true) {
             return $resultUpload;
@@ -105,7 +105,7 @@ class ProductLogic {
       }
       $result = $this->DataHandler->updateData($sql);
       $formContent = $this->readProduct($data["id"]);
-      $results = $formContent
+      $results = $formContent;
       $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
       return $content;
     } catch (Exception $e) {
