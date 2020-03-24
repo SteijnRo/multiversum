@@ -50,30 +50,10 @@ class ProductLogic {
       throw $e;
     }
   }
-
-  public function updateContact($data) {
-    try {
-      foreach ($data as $key => $value) {
-        if ($data[$key] == "") {
-          $data[$key] = "-";
-        }
-      }
-      if (isset($data["openH"]) || $data["openH"] !== "-") {
-        $sql = 'UPDATE businesshours ';
-        $sql .= 'SET (openH="' . $data["openH"] . '", closeH="' . $data["closeH"] . '") ';
-        $sql .= 'WHERE id = ' . $data["id"];
-      }
-      $results = $this->DataHandler->updateContactData($sql);
-      return $results;
-    } catch (Exception $e) {
-      throw $e;
-    }
-  }
-
   public function readProducts() {
-    $header = $this->readHeader();
-    $footer = $this->readFooter();
     try {
+      $header = $this->readHeader();
+      $footer = $this->readFooter();
       $qry = "SELECT * ";
       $qry .= "FROM products ";
       // SELECT id, name, brand, specification, pic, price, qty, sale, salePercent FROM products;
@@ -101,23 +81,33 @@ class ProductLogic {
 
   public function updateGoggle($data, $files) {
     try {
+      $header = $this->readHeader();
+      $footer = $this->readFooter();
+      if (empty($data)) {
+        return $content = array( 'header' => $header, 'result' => "Geen waardes meegegeven", 'footer' => $footer);
+      }
       foreach ($data as $key => $value) {
         if ($data[$key] == "") {
           $data[$key] = "-";
         }
       }
       if (isset($files) && !empty($files)) {
-          $this->uploadFile($data, $files);
+        $resultUpload = $this->uploadFile($data, $files);
+          if ($resultUpload !== true) {
+            return $resultUpload;
+          }
           $sql = 'UPDATE products ';
-          //                             name,                          brand,                                description,                         pic,                                  price,                             platform,                               resolution,                                refreshRate,                              functions,                                        physicalConnections,                        fov,                               accesories,                              insurance,                            special,                        qty,                         sale,                                salePercent,                        EAN,                        SKU) 
           $sql .= 'SET name="' . $data["name"] . '", brand="' . $data["brand"] . '", description="' . $data["description"] . '", pic="' . $files["pic"]["name"] . '", price="' . $data["price"] . '", platform="' . $data["platform"] . '", resolution="' . $data["resolution"] . '", refreshRate="' . $data["refreshRate"] . '", functions="' . $data["functions"] . '", physicalConnections="' . $data["physicalConnections"] . '", fov="' . $data["fov"] . '", accesories="' . $data["accesories"] . '", insurance="' . $data["insurance"] . '", special="' . $data["special"] . '", qty="' . $data["qty"] . '", sale="' . $data["sale"] . '", salePercent="' . $data["salePercent"] . '", EAN="' . $data["EAN"] . '", SKU="' . $data["SKU"] . '" ';
           $sql .= 'WHERE id = ' . $data["id"];
       } else {
         $sql = 'UPDATE products ';
         $sql .= 'SET name="' . $data["name"] . '", brand="' . $data["brand"] . '", description="' . $data["description"] . '", price="' . $data["price"] . '", platform="' . $data["platform"] . '", resolution="' . $data["resolution"] . '", refreshRate="' . $data["refreshRate"] . '", functions="' . $data["functions"] . '", physicalConnections="' . $data["physicalConnections"] . '", fov="' . $data["fov"] . '", accesories="' . $data["accesories"] . '", insurance="' . $data["insurance"] . '", special="' . $data["special"] . '", qty="' . $data["qty"] . '", sale="' . $data["sale"] . '", salePercent="' . $data["salePercent"] . '", EAN="' . $data["EAN"] . '", SKU="' . $data["SKU"] . '" ';
       }
-      $results = $this->DataHandler->updateData($sql);
-      return $results;
+      $result = $this->DataHandler->updateData($sql);
+      $formContent = $this->readProduct($data["id"]);
+      $results = $formContent
+      $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
+      return $content;
     } catch (Exception $e) {
       throw $e;
     }
@@ -171,7 +161,7 @@ class ProductLogic {
     // Check if  file already exists
     if (file_exists($targetFile)) {
       // not uploaded cause file with identical name already exists
-      unlink("view/assets/media/" . $files["pic"]["name"]);
+      return "Bestand met de zelfde naam bestaal al";
     }
     // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
@@ -184,7 +174,7 @@ class ProductLogic {
         return true;
       } else {
         // not uploaded
-        return false;
+        return "Er is iets fout gegaan bij het uploaden van het bestand.";
       }
     }
   }
