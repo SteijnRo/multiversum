@@ -62,6 +62,14 @@ $products = $content['result'];
         // rating
       }
       echo '</div>';
+      $buttonAmount = count($products)/10;
+      $buttonAmount = round($buttonAmount,0,PHP_ROUND_HALF_UP);
+      echo '<div class="col-md-12 center-block text-center paginationDiv">';
+      for ($i = 0; $i < $buttonAmount; $i++) {
+        $iPlusOne = $i + 1;
+        echo "<a href=\"?page=$iPlusOne\" class=\"btn btn-primary btn-lg\">$iPlusOne</a>\t";
+      }
+      echo '</div>';
       ?>
     </div>
   </div>

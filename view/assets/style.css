@@ -214,6 +214,10 @@ html, body {
     width:100%;
 }
 
+.paginationDiv {
+    margin-bottom: 20px;
+}
+
 #orderConfirmModal {
     color: black;
 }
