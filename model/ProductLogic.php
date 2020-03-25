@@ -42,8 +42,8 @@ class ProductLogic {
       $header = $this->readHeader();
       $footer = $this->readFooter();
       $content = array('header' => $header, 'result' => "", 'footer' => $footer);
-
-      if (!isset($data["productIDs"]) || !isset($data["name"]) || !isset($data["adress"]) || !isset($data["city"]) || !isset($data["state"]) || !isset($data["postcode"]) || !isset($data["telNum"]) || !isset($data["email"])) {
+      
+      if (!isset($data["productID"]) || !isset($data["name"]) || !isset($data["adress"]) || !isset($data["city"]) || !isset($data["state"]) || !isset($data["postcode"]) || !isset($data["telNum"]) || !isset($data["email"])) {
         return "Lege velden tegen gekomen.";
       }
 
@@ -53,15 +53,44 @@ class ProductLogic {
         return "Foutief e-mail adres opgegeven.";
       }
 
+      $emailData["subject"] = "Confirmatie bestelling Multiversum";
+      $emailData["email"] = $data["email"];
+      $emailData["msg"] = '
+        <h3>Beste klant,</h3>
+        <p>
+          Nogmaals hartelijk dank voor uw bestelling bij multiversum. Wij hopen dat u tevreden bent met uw<br>
+          aankoop en deze volledig aan uw verwachtingen voldoet. Uw bestelling is met de grootste zorg<br>
+          uitgevoerd en wij streven dan ook naar een perfecte kwaliteit voor alle artikelen die u ontvangt.<br>
+          In de bijlage zult u de bon kunnen downloaden.<br>
+          <br>
+          <br>
+          Met vriendelijke groet,
+          <br>
+          Multiversum.
+        </p>
+        <br>
+        <br>
+        <p class="disclaimer">
+          Indien dit bericht kennelijk bij vergissing aan u is verzonden, verzoeken wij u het onverwijld te retourneren aan de verzender, het origineel te verwijderen en geen kopieën te behouden. Dit e-mailbericht gaat uit multiversum en/of gelieerde werkmaatschappijen en is uitsluitend bestemd voor geadresseerde(n). Dit bericht kan informatie bevatten die vertrouwelijk is, door beroepsaansprakelijkheid gedekt of om auteurrechtelijke of andere redenen beschermd is. Indien u niet als geadresseerde bent aangeduid, dient u zich te onthouden van kennisneming, gebruikmaking, openbaarmaking, verveelvoudiging of verdere verspreiding van de inhoud van dit bericht en/of de eventuele bijlagen. Aan de inhoud van dit bericht kan geen enkel recht worden ontleend, tenzij dit specifiek in de e-mail of bijlage wordt vermeld. 
+        </p>
+        <footer class="footer">(C) Multiversum | All Rights Reserved</footer>
+      ';
+
+      $emailSent = $this->sendEmail($emailData);
+
       $productIDs = "";
       // foreach ($data["productID"] as $value) {
       //   $productIDs .= $value . "*";
       // }
       // $productIDs = rtrim($productIDs, "*");
       $productIDs = $data["productID"];
+      // for ($i = 0; $i < count($productIDArray))
+      $headsetData = $this->readProduct($productIDs);
+      
+      $paidPrice = $headsetData["result"][0]["price"];
 
-      $sql = 'INSERT INTO orders (productIDs, name, adress, city, state, postcode, telNum, email) ';
-      $sql .= 'VALUES("' . $productIDs . '", "' . trim($data["name"]) . '", "' . trim($data["adress"]) . '", "' . trim($data["city"]) . '", "' . trim($data["state"]) . '", "' . trim($data["postcode"]) . '", "' . trim($data["telNum"]) . '", "' . trim($data["email"]) . '") ';
+      $sql = 'INSERT INTO orders (productIDs, paidPrice, name, adress, city, state, postcode, telNum, email) ';
+      $sql .= 'VALUES("' . $productIDs . '", "' . trim($paidPrice) . '", "' . trim($data["name"]) . '", "' . trim($data["adress"]) . '", "' . trim($data["city"]) . '", "' . trim($data["state"]) . '", "' . trim($data["postcode"]) . '", "' . trim($data["telNum"]) . '", "' . trim($data["email"]) . '") ';
       $results = $this->DataHandler->createData($sql);
       $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
       return $content;
@@ -166,6 +195,7 @@ class ProductLogic {
       } else {
         $sql = 'UPDATE products ';
         $sql .= 'SET name="' . $data["name"] . '", brand="' . $data["brand"] . '", description="' . $data["description"] . '", price="' . $data["price"] . '", platform="' . $data["platform"] . '", resolution="' . $data["resolution"] . '", refreshRate="' . $data["refreshRate"] . '", functions="' . $data["functions"] . '", physicalConnections="' . $data["physicalConnections"] . '", fov="' . $data["fov"] . '", accesories="' . $data["accesories"] . '", insurance="' . $data["insurance"] . '", special="' . $data["special"] . '", qty="' . $data["qty"] . '", sale="' . $data["sale"] . '", salePercent="' . $data["salePercent"] . '", EAN="' . $data["EAN"] . '", SKU="' . $data["SKU"] . '" ';
+        $sql .= 'WHERE id = ' . $data["id"];
       }
       $result = $this->DataHandler->updateData($sql);
       $formContent = $this->readProduct($data["id"]);
@@ -219,7 +249,19 @@ class ProductLogic {
     return $content = array('header' => $header, 'result' => "", 'footer' => $footer);
   }
 
-  public function deleteContact() { }
+  public function deleteProduct($id) {
+    try {
+      $header = $this->readHeader();
+      $footer = $this->readFooter();
+      $productInfo = $this->readProduct($id);
+      $sql = "DELETE FROM products ";
+      $sql .= "WHERE id = \"$id\"";
+      $this->DataHandler->deleteData($sql);
+      return $this->readProducts();
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
 
   public function readHeader(){
     try {
@@ -287,6 +329,7 @@ class ProductLogic {
   }
 
   public function sendEmail($data) {
+    $subject = $data["subject"];
     $mail = $data["email"];
     $msg = $data["msg"];
     // Load Composer's autoloader
@@ -312,13 +355,13 @@ class ProductLogic {
 
         // content
         $mailer->isHTML(TRUE);
-        $mailer->Subject = "Contact formilier ja toch";
+        $mailer->Subject = $subject;
         $mailer->Body = $msg;
 
         $mailer->send();
-        return true;
+        return "E-mail verstuurd";
     } catch (Exception $e) {
-        return false;
+        return "E-mail versturen mislukt";
     }
   }
   

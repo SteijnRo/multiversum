@@ -1,3 +1,3 @@
 <?php
-echo "yay";
+var_dump($content);
 ?>

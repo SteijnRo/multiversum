@@ -34,6 +34,7 @@ CREATE TABLE buisnessHours  (
 CREATE TABLE orders (
     id int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     productIDs varchar(500),
+    paidPrice varchar(255),
     name varchar(255),
     adress varchar(255),
     city varchar(255),

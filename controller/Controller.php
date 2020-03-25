@@ -31,6 +31,9 @@ class Controller {
         case 'updateGoggle':
           $this->collectUpdateGoggle($_POST, $_FILES);
         break;
+        case 'deleteProduct':
+          $this->collectDeleteProduct();
+        break;
         case 'sendEmail':
           $this->collectSendEmail($_POST);
         break;
@@ -156,7 +159,10 @@ class Controller {
     include_once 'view/buyForm.php';
   }
 
-  public function collectDeleteContact() {}
+  public function collectDeleteProduct() {
+    $content = $this->ProductLogic->deleteProduct($_POST["id"]);
+    include_once 'view/main.php';
+  }
 
   public function readHeader() {
     $header = $this->ProductLogic->readHeader();
