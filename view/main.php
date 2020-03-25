@@ -1,6 +1,6 @@
 <?php
 // pagination
-$productsPerPage = 10;
+$productsPerPage =10;
 $page = 1;
 
 if (isset($_GET["page"])) {

@@ -1,7 +1,7 @@
 <?php
 include 'view/header.php';
 ?>
-    <ul class="list-inline mx-auto justify-content-center" id="privacy-statement">
+    <ul class="list-inline mx-auto justify-content-center text-center" id="privacy-statement">
     <?php
         $privacy = $content['result'];
         echo $privacy[0]['content'];
