@@ -213,3 +213,7 @@ html, body {
 .orderOverviewTable {
     width:100%;
 }
+
+#orderConfirmModal {
+    color: black;
+}

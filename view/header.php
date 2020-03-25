@@ -26,7 +26,7 @@
       <?php
         for ($i=0; $i <count($content['header']) ; $i++) { 
           echo "<li class=\"nav-item\">
-          <a class=\"nav-link btn-outline-secondary\"  href=\"" . $content['header'][$i]['link'] . "\">" . $content['header'][$i]['name'] . "</a>
+          <a class=\"nav-link\"  href=\"" . $content['header'][$i]['link'] . "\">" . $content['header'][$i]['name'] . "</a>
           </li>";
         }
         ?>
@@ -34,3 +34,4 @@
   </div>
 </nav>
 
+<!--  btn-outline-secondary -->
