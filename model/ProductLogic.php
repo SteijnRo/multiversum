@@ -46,15 +46,11 @@ class ProductLogic {
       if (!isset($data["productIDs"]) || !isset($data["name"]) || !isset($data["adress"]) || !isset($data["city"]) || !isset($data["state"]) || !isset($data["postcode"]) || !isset($data["telNum"]) || !isset($data["email"])) {
         return "Lege velden tegen gekomen.";
       }
-      
+
       $emailCheck = !preg_replace("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", "", $data["email"]);
 
-      if (!$string) {
+      if (!$emailCheck) {
         return "Foutief e-mail adres opgegeven.";
-      }
-
-      foreach ($data as $value) {
-        
       }
 
       $productIDs = "";
@@ -88,17 +84,47 @@ class ProductLogic {
       throw $e;
     }
   }
+
   public function readProducts() {
     try {
       $header = $this->readHeader();
       $footer = $this->readFooter();
       $qry = "SELECT * ";
       $qry .= "FROM products ";
-      // SELECT id, name, brand, specification, pic, price, qty, sale, salePercent FROM products;
       $res = $this->DataHandler->readsData($qry);
       $results = $res->fetchAll();
 
-      $content = array( 'header' => $header, 'result' => $results, 'footer' => $footer);
+      $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
+      return $content;
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
+  public function readOrders() {
+    try {
+      $header = $this->readHeader();
+      $footer = $this->readFooter();
+      $qry = "SELECT * ";
+      $qry .= "FROM orders ";
+      $res = $this->DataHandler->readsData($qry);
+      $orders = $res->fetchAll();
+
+      $productDetailsArray = array();
+      for ($i = 0; $i < count($orders); $i++) {
+        $productIDArray = explode("*", $orders[$i]["productIDs"]);
+        for ($j = 0; $j < count($productIDArray); $j++) {
+          $qry = "SELECT id, name, price ";
+          $qry .= "FROM products ";
+          $qry .= "WHERE id = " . $productIDArray[$j];
+          $res = $this->DataHandler->readsData($qry);
+          $productDetailsArray[] = $res->fetchAll();
+        }
+      }
+
+      $results = array("orders"=>$orders, "products"=>$productDetailsArray);
+
+      $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
       return $content;
     } catch (Exception $e) {
       throw $e;
@@ -122,7 +148,7 @@ class ProductLogic {
       $header = $this->readHeader();
       $footer = $this->readFooter();
       if (empty($data)) {
-        return $content = array( 'header' => $header, 'result' => "Geen waardes meegegeven", 'footer' => $footer);
+        return $content = array('header' => $header, 'result' => "Geen waardes meegegeven", 'footer' => $footer);
       }
       foreach ($data as $key => $value) {
         if ($data[$key] == "") {
@@ -354,7 +380,7 @@ class ProductLogic {
       $res = $this->DataHandler->readsData($qry);
       $results = $res->fetchAll();
 
-      $content = array( 'header' => $header, 'result' => $results, 'footer' => $footer);
+      $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
       return $content;
     }catch (Exception $e) {
       throw $e;
@@ -372,7 +398,7 @@ class ProductLogic {
       $res = $this->DataHandler->readsData($qry);
       $results = $res->fetchAll();
 
-      $content = array( 'header' => $header, 'result' => $results, 'footer' => $footer);
+      $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
       return $content;
     }catch (Exception $e) {
       throw $e;
@@ -390,7 +416,7 @@ class ProductLogic {
       $res = $this->DataHandler->readsData($qry);
       $results = $res->fetchAll();
 
-      $content = array( 'header' => $header, 'result' => $results, 'footer' => $footer);
+      $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
       return $content;
     }catch (Exception $e) {
       throw $e;
@@ -408,7 +434,7 @@ class ProductLogic {
       $res = $this->DataHandler->readsData($qry);
       $results = $res->fetchAll();
 
-      $content = array( 'header' => $header, 'result' => $results, 'footer' => $footer);
+      $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
       return $content;
     }catch (Exception $e) {
       throw $e;
