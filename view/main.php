@@ -51,6 +51,10 @@ $products = $content['result'];
                 <input type="hidden" name="productID" value="' . $products[$startProducts]["id"] . '">
                 <input type="submit" value="Koop nu">
               </form>
+              <form action="?op=deleteProduct" method="post">
+                <input type="hidden" name="id" value="' . $products[$startProducts]["id"] . '">
+                <input type="submit" value="Verwijder product">
+              </form>
             </div>
           </div>
         </div>
