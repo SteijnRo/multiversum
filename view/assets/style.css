@@ -221,3 +221,7 @@ html, body {
 #orderConfirmModal {
     color: black;
 }
+
+.admin-pannel li{
+    margin: 20px;
+}

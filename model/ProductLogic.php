@@ -483,6 +483,21 @@ class ProductLogic {
       throw $e;
     }
   }
+
+  public function readAdminPannel() {
+    try {
+      $header = $this->readHeader();
+      $footer = $this->readFooter();
+      $sql = 'SELECT * FROM header';
+      $res = $this->DataHandler->readsData($sql);
+      $results = $res->fetchAll();
+
+      $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
+      return $content;
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
 }
 
 ?>

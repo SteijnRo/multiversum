@@ -70,6 +70,9 @@ class Controller {
         case 'cookies':
           $this->collectReadCookies();
         break;
+        case 'adminPannel':
+          $this->readAdminPannel();
+        break;
         default:
           $this->collectReadProducts();
         break;
@@ -167,6 +170,11 @@ class Controller {
   public function readHeader() {
     $header = $this->ProductLogic->readHeader();
     include_once 'view/header.php';
+  }
+
+  public function readAdminPannel() {
+    $content = $this->ProductLogic->readAdminPannel();
+    include_once 'view/adminPannel.php';
   }
 
   public function readFooter() {
