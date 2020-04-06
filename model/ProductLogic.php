@@ -488,11 +488,12 @@ class ProductLogic {
     try {
       $header = $this->readHeader();
       $footer = $this->readFooter();
+      $products = $this->readProducts();
       $sql = 'SELECT * FROM header';
       $res = $this->DataHandler->readsData($sql);
       $results = $res->fetchAll();
 
-      $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
+      $content = array('header' => $header, 'result' => $results, 'products' => $products, 'footer' => $footer);
       return $content;
     } catch (Exception $e) {
       throw $e;
