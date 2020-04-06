@@ -39,6 +39,11 @@ include 'view/header.php';
     </form>
   </div>
 </div>
+<h3>
+  <small>
+    <a href="?op=adminPanel">Ga terug</a>
+  </small>
+</h3>
 <?php
 include './view/footer.php'; 
 ?>

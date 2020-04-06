@@ -10,15 +10,19 @@ function d($a){
   <div class="row d-flex justify-content-center">
     <ul class="list-group list-group-horizontal admin-pannel">
       <?php
-      for ($i = 2; $i < count($content['result']); $i++) {
-        // d($content['result']);
-        // print_r($content['result']);
-        echo "
-          <li class=\"list-group\">
-          <a class=\"list-group-item list-group-item-action\"  href=\"" . $content['result'][$i]['link'] . "\">" . $content['result'][$i]['name'] . "</a>
-          </li>
-        ";
-      }
+        for ($i=0; $i <count($content['header']) ; $i++) { 
+          if (isset($_SESSION["perms"]) && $_SESSION["perms"] == $content["header"][$i]["perms"]) {
+            if ($content['header'][$i]['link'] != "?op=logout") {
+              if ($content['header'][$i]['link'] != "?op=adminPanel") {
+                echo "
+                  <li class=\"list-group\">
+                    <a class=\"list-group-item list-group-item-action\"  href=\"" . $content['header'][$i]['link'] . "\">" . $content['header'][$i]['name'] . "</a>
+                  </li>
+                ";
+              }
+            }
+          }
+        }
       ?>
     </ul>
   </div>

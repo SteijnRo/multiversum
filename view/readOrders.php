@@ -36,6 +36,11 @@ $products = $content["result"]["products"];
     echo '
             </table>
           </div>
+          <h3>
+            <small>
+              <a href="?op=adminPanel">Ga terug</a>
+            </small>
+          </h3>
         </div>
       </div>
     </div>

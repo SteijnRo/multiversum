@@ -24,10 +24,21 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <?php
-        for ($i=0; $i <count($content['header']) ; $i++) { 
-          echo "<li class=\"nav-item\">
-          <a class=\"nav-link\"  href=\"" . $content['header'][$i]['link'] . "\">" . $content['header'][$i]['name'] . "</a>
-          </li>";
+        for ($i=0; $i <count($content['header'])-3 ; $i++) { 
+          if (isset($_SESSION["perms"]) && $_SESSION["perms"] == $content["header"][$i]["perms"] || $content["header"][$i]["perms"] == "everyone") {
+            echo "
+              <li class=\"nav-item\">
+              <a class=\"nav-link\"  href=\"" . $content['header'][$i]['link'] . "\">" . $content['header'][$i]['name'] . "</a>
+              </li>
+            ";
+          } elseif ($content["header"][$i]["perms"] == "everyone") {
+            echo "
+              <li class=\"nav-item\">
+              <a class=\"nav-link\"  href=\"" . $content['header'][$i]['link'] . "\">" . $content['header'][$i]['name'] . "</a>
+              </li>
+            ";
+          }
+          
         }
         ?>
     </ul>
