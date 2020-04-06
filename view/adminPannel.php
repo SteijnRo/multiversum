@@ -25,7 +25,7 @@ function d($a){
 </div>
 
 <?php
-$productsPerPage =9;
+$productsPerPage =25;
 $page = 1;
 
 if (isset($_GET["page"])) {
@@ -49,44 +49,39 @@ $products = $content['products'];
           break;
         }
         echo '
-        <div class="col-md-4">
-          <div class="card w-75">
-            <div class="card-img-outer">
-              <div class="card-img">
-                <a href="?op=details&id=' . $products['result'][$startProducts]["id"] . '"><img class="card-img-top" id="product-img" src="./view/assets/media/' . $products['result'][$startProducts]["pic"] . '" alt="pic" height="300px"></a>
-              </div>
-            </div>
-            <div class="card-body">
-              <h4 class="card-title">
-                <a href="?op=details&id=' . $products['result'][$startProducts]["id"] . '">' . $products['result'][$startProducts]["name"] . '</a>
-              </h4>
-              <h5>€' . $products['result'][$startProducts]["price"] . '</h5>
-              <p class="card-text">' . $products['result'][$startProducts]["description"] . '</p>
-            </div>
-            <div class="card-footer">
-              <a href="?op=updateGoggleForm&id=' . $products['result'][$startProducts]["id"] . '">Pas Product Aan </a>
-              <form action="?op=deleteProduct" method="post">
-                <input type="hidden" name="id" value="' . $products['result'][$startProducts]["id"] . '">
-                <input type="submit" value="Verwijder product">
-              </form>
-            </div>
-          </div>
+        <div class="col-md-12">
+        <ul class="list-group AdminProductsList">
+          <li class="list-group-item AdminProductsList">' . $products['result'][$startProducts]["name"] . '</li>
+          <a href="?op=updateGoggleForm&id=' . $products['result'][$startProducts]["id"] . '">Pas Product Aan </a>
+          <form action="?op=deleteProduct" method="post">
+            <input type="hidden" name="id" value="' . $products['result'][$startProducts]["id"] . '">
+            <input type="submit" value="Verwijder product">
+          </form>
+        </ul>
         </div>
+        
         ';
         // rating
       }
-      echo '</div>';
-      $buttonAmount = count($products)/$productsPerPage;
-      $buttonAmount = round($buttonAmount,0,PHP_ROUND_HALF_UP);
-      echo '<div class="col-md-12 center-block text-center paginationDiv">';
-      for ($i = 0; $i < $buttonAmount; $i++) {
-        $iPlusOne = $i + 1;
-        echo "<a href=\"?page=$iPlusOne\" class=\"btn btn-primary btn-lg\">$iPlusOne</a>\t";
-      }
-      echo '</div>';
       ?>
     </div>
   </div>
 <?php
 include_once "view/footer.php";
+// <div class="col-md-3">
+//           <div class="card w-75">
+//             <div class="card-body">
+//               <h4 class="card-title">
+//                 <a href="?op=details&id=' . $products['result'][$startProducts]["id"] . '">' . $products['result'][$startProducts]["name"] . '</a>
+//               </h4>
+//             </div>
+//             <div class="card-footer">
+//               <a href="?op=updateGoggleForm&id=' . $products['result'][$startProducts]["id"] . '">Pas Product Aan </a>
+//               <form action="?op=deleteProduct" method="post">
+//                 <input type="hidden" name="id" value="' . $products['result'][$startProducts]["id"] . '">
+//                 <input type="submit" value="Verwijder product">
+//               </form>
+//             </div>
+//           </div>
+//         </div>
 ?>

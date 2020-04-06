@@ -225,3 +225,7 @@ html, body {
 .admin-pannel li{
     margin: 20px;
 }
+
+.AdminProductsList {
+    color: black;
+}
