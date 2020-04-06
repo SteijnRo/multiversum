@@ -70,8 +70,17 @@ class Controller {
         case 'cookies':
           $this->collectReadCookies();
         break;
-        case 'adminPannel':
-          $this->readAdminPannel();
+        case 'adminPanel':
+          $this->collectReadAdminPanel();
+        break;
+        case 'login':
+          $this->collectReadLoginForm();
+        break;
+        case 'loginSubmit':
+          $this->collectReadLoginSubmit($_POST);
+        break;
+        case 'logout':
+          $this->collectReadLogout();
         break;
         default:
           $this->collectReadProducts();
@@ -167,24 +176,39 @@ class Controller {
     include_once 'view/main.php';
   }
 
-  public function readHeader() {
+  public function collectReadHeader() {
     $header = $this->ProductLogic->readHeader();
     include_once 'view/header.php';
   }
 
-  public function readAdminPannel() {
-    $content = $this->ProductLogic->readAdminPannel();
-    include_once 'view/adminPannel.php';
+  public function collectReadAdminPanel() {
+    $content = $this->ProductLogic->readAdminPanel();
+    include_once 'view/adminPanel.php';
+  }
+  
+  public function collectReadLoginForm() {
+    $content = $this->ProductLogic->readLoginForm();
+    include_once 'view/login.php';
   }
 
-  public function readFooter() {
+  public function collectReadLogout() {
+    $content = $this->ProductLogic->readLogout();
+    include_once 'view/main.php';
+  }
+  
+  public function collectReadLoginSubmit($data) {
+    $content = $this->ProductLogic->readLoginSubmit($data);
+    include_once 'view/' . $content["view"] . '.php';
+  }
+
+  public function collectReadFooter() {
     $footer = $this->ProductLogic->readFooter();
     include_once 'view/footer.php';
   }
 
   public function collectSendEmail($data){
     $this->ProductLogic->sendEmail($data);
-    $this->collectReadProducts();
+    $content = $this->collectReadProducts();
     include_once 'view/main.php';
   }
 }

@@ -1,6 +1,6 @@
 <?php
 // pagination
-$productsPerPage =10;
+$productsPerPage = 9;
 $page = 1;
 
 if (isset($_GET["page"])) {
@@ -9,8 +9,8 @@ if (isset($_GET["page"])) {
   }
 }
 
-$startProducts = $page * $productsPerPage - 10;
-$startProductsCount = $startProducts + 10;
+$startProducts = $page * $productsPerPage - $productsPerPage;
+$startProductsCount = $startProducts + $productsPerPage;
 
 include 'view/header.php';
 $products = $content['result'];
@@ -62,7 +62,7 @@ $products = $content['result'];
         // rating
       }
       echo '</div>';
-      $buttonAmount = count($products)/10;
+      $buttonAmount = count($products)/$productsPerPage;
       $buttonAmount = round($buttonAmount,0,PHP_ROUND_HALF_UP);
       echo '<div class="col-md-12 center-block text-center paginationDiv">';
       for ($i = 0; $i < $buttonAmount; $i++) {

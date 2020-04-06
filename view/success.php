@@ -16,9 +16,6 @@ include 'view/header.php';
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <p></p>
-      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary"></button>
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>

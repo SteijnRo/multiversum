@@ -27,6 +27,11 @@ if ($content['result'] != "") {
 ?>
 <div class="container  d-flex justify-content-center" id="ProductDetails">
   <div class="col-md-8 ">
+    <h3>
+      <small>
+        <a href="?op=adminPanel">Ga terug</a>
+      </small>
+    </h3>
     <h1>Voeg product toe</h1>
     <!-- Portfolio Item Heading -->
     <form action="?op=addProduct" method="post" enctype="multipart/form-data">

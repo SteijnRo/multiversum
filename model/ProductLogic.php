@@ -484,7 +484,7 @@ class ProductLogic {
     }
   }
 
-  public function readAdminPannel() {
+  public function readAdminPanel() {
     try {
       $header = $this->readHeader();
       $footer = $this->readFooter();
@@ -493,6 +493,65 @@ class ProductLogic {
       $results = $res->fetchAll();
 
       $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
+      return $content;
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
+  public function readLoginForm() {
+    try {
+      $header = $this->readHeader();
+      $footer = $this->readFooter();
+
+      $content = array('header' => $header, 'result' => "meme", 'footer' => $footer);
+      return $content;
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
+  public function readLoginSubmit($data) {
+    try {
+      $header = $this->readHeader();
+      $footer = $this->readFooter();
+      if (isset($data["username"]) && isset($data["password"])) {
+        $sql = 'SELECT * FROM users WHERE username = "' . $data["username"] . '"';
+        $res = $this->DataHandler->readsData($sql);
+        $results = $res->fetchAll();
+        
+        if (!empty($results)) {
+          $passwordCheck = password_verify($data["password"], $results[0]["password"]);
+          if ($passwordCheck) {
+            $_SESSION["username"] = $results[0]["username"];
+            $_SESSION["perms"] = $results[0]["perms"];
+            $view = "adminpanel";
+          } else {
+            $view = "login";
+          }
+        } else {
+          $view = "login";
+        }
+      } else {
+        $view = "login";
+      }
+      $content = array('header' => $header, 'result'=>$results, 'view'=>$view, 'footer' => $footer);
+      return $content;
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
+  public function readLogout() {
+    try {
+      $header = $this->readHeader();
+      $footer = $this->readFooter();
+      
+      $products = $this->readProducts();
+
+      session_destroy();
+
+      $content = array('header' => $header, 'result'=>$products["result"], 'footer' => $footer);
       return $content;
     } catch (Exception $e) {
       throw $e;
