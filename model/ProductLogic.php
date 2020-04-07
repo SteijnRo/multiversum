@@ -26,8 +26,8 @@ class ProductLogic {
       if (!$this->uploadFile($data, $files)) {
         return $content;
       }
-      $sql = 'INSERT INTO products (name, brand, description, pic, price, platform, resolution, refreshRate, functions, physicalConnections, fov, accesories, insurance, special, qty, sale, salePercent, EAN, SKU) ';
-      $sql .= 'VALUES("' . $data["name"] . '", "' . $data["brand"] . '", "' . $data["description"] . '", "' . $files["pic"]["name"] . '", "' . $data["price"] . '", "' . $data["platform"] . '", "' . $data["resolution"] . '", "' . $data["refreshRate"] . '", "' . $data["functions"] . '", "' . $data["physicalConnections"] . '", "' . $data["fov"] . '", "' . $data["accesories"] . '", "' . $data["insurance"] . '", "' . $data["special"] . '", "' . $data["qty"] . '", "' . $data["sale"] . '", "' . $data["salePercent"] . '", "' . $data["EAN"] . '", "' . $data["SKU"] . '") ';
+      $sql = 'INSERT INTO products (name, brand, description, pic, price, platform, resolution, refreshRate, functions, physicalConnections, fov, accesories, insurance, special, qty, sale, salePercent, archive, EAN, SKU) ';
+      $sql .= 'VALUES("' . $data["name"] . '", "' . $data["brand"] . '", "' . $data["description"] . '", "' . $files["pic"]["name"] . '", "' . $data["price"] . '", "' . $data["platform"] . '", "' . $data["resolution"] . '", "' . $data["refreshRate"] . '", "' . $data["functions"] . '", "' . $data["physicalConnections"] . '", "' . $data["fov"] . '", "' . $data["accesories"] . '", "' . $data["insurance"] . '", "' . $data["special"] . '", "' . $data["qty"] . '", "' . $data["sale"] . '", "' . $data["salePercent"] . '", "' . $data["archive"] . '", "' . $data["EAN"] . '", "' . $data["SKU"] . '") ';
       // INSERT INTO products (name, brand, specification, pic, price, qty, sale, salePercent) VALUES("test", "samsung", "yes", "stonks.jpg", 123, 1, 0, 0);
       $results = $this->DataHandler->createData($sql);
       $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
@@ -184,17 +184,30 @@ class ProductLogic {
           $data[$key] = "-";
         }
       }
+
+      if ($data["sale"] == "true") {
+        $data["sale"] = 1;
+      } else {
+        $data["sale"] = 0;
+      }
+
+      if ($data["archive"] == "true") {
+        $data["archive"] = 1;
+      } else {
+        $data["archive"] = 0;
+      }
+
       if (isset($files) && !empty($files["pic"]["name"])) {
         $resultUpload = $this->uploadFile($data, $files);
           if ($resultUpload !== true) {
             return $resultUpload;
           }
           $sql = 'UPDATE products ';
-          $sql .= 'SET name="' . $data["name"] . '", brand="' . $data["brand"] . '", description="' . $data["description"] . '", pic="' . $files["pic"]["name"] . '", price="' . $data["price"] . '", platform="' . $data["platform"] . '", resolution="' . $data["resolution"] . '", refreshRate="' . $data["refreshRate"] . '", functions="' . $data["functions"] . '", physicalConnections="' . $data["physicalConnections"] . '", fov="' . $data["fov"] . '", accesories="' . $data["accesories"] . '", insurance="' . $data["insurance"] . '", special="' . $data["special"] . '", qty="' . $data["qty"] . '", sale="' . $data["sale"] . '", salePercent="' . $data["salePercent"] . '", EAN="' . $data["EAN"] . '", SKU="' . $data["SKU"] . '" ';
+          $sql .= 'SET name="' . $data["name"] . '", brand="' . $data["brand"] . '", description="' . $data["description"] . '", pic="' . $files["pic"]["name"] . '", price="' . $data["price"] . '", platform="' . $data["platform"] . '", resolution="' . $data["resolution"] . '", refreshRate="' . $data["refreshRate"] . '", functions="' . $data["functions"] . '", physicalConnections="' . $data["physicalConnections"] . '", fov="' . $data["fov"] . '", accesories="' . $data["accesories"] . '", insurance="' . $data["insurance"] . '", special="' . $data["special"] . '", qty="' . $data["qty"] . '", sale="' . $data["sale"] . '", salePercent="' . $data["salePercent"] . '", archive="' . $data["archive"] . '", EAN="' . $data["EAN"] . '", SKU="' . $data["SKU"] . '" ';
           $sql .= 'WHERE id = ' . $data["id"];
       } else {
         $sql = 'UPDATE products ';
-        $sql .= 'SET name="' . $data["name"] . '", brand="' . $data["brand"] . '", description="' . $data["description"] . '", price="' . $data["price"] . '", platform="' . $data["platform"] . '", resolution="' . $data["resolution"] . '", refreshRate="' . $data["refreshRate"] . '", functions="' . $data["functions"] . '", physicalConnections="' . $data["physicalConnections"] . '", fov="' . $data["fov"] . '", accesories="' . $data["accesories"] . '", insurance="' . $data["insurance"] . '", special="' . $data["special"] . '", qty="' . $data["qty"] . '", sale="' . $data["sale"] . '", salePercent="' . $data["salePercent"] . '", EAN="' . $data["EAN"] . '", SKU="' . $data["SKU"] . '" ';
+        $sql .= 'SET name="' . $data["name"] . '", brand="' . $data["brand"] . '", description="' . $data["description"] . '", price="' . $data["price"] . '", platform="' . $data["platform"] . '", resolution="' . $data["resolution"] . '", refreshRate="' . $data["refreshRate"] . '", functions="' . $data["functions"] . '", physicalConnections="' . $data["physicalConnections"] . '", fov="' . $data["fov"] . '", accesories="' . $data["accesories"] . '", insurance="' . $data["insurance"] . '", special="' . $data["special"] . '", qty="' . $data["qty"] . '", sale="' . $data["sale"] . '", salePercent="' . $data["salePercent"] . '", archive="' . $data["archive"] . '", EAN="' . $data["EAN"] . '", SKU="' . $data["SKU"] . '" ';
         $sql .= 'WHERE id = ' . $data["id"];
       }
       $result = $this->DataHandler->updateData($sql);
@@ -219,6 +232,19 @@ class ProductLogic {
           $data[$key] = "-";
         }
       }
+
+      if ($data["sale"] == "true") {
+        $data["sale"] = 1;
+      } else {
+        $data["sale"] = 0;
+      }
+
+      if ($data["archive"] == "true") {
+        $data["archive"] = 1;
+      } else {
+        $data["archive"] = 0;
+      }
+      
       if ($data["formType"] == "companyHours") {
         $result = array();
         for ($i = 0; $i < count($data["businesshours"]); $i++) {
@@ -245,19 +271,38 @@ class ProductLogic {
 
   public function readBuyForm() {
     $header = $this->readHeader();
-    $header = $this->readFooter();
+    $footer = $this->readFooter();
     return $content = array('header' => $header, 'result' => "", 'footer' => $footer);
+  }
+
+  public function archiveProduct($id) {
+    try {
+      $header = $this->readHeader();
+      $footer = $this->readFooter();
+      $sql = 'UPDATE product ';
+      $sql .= 'SET ';
+      $sql .= 'WHERE id = 1';
+      $deleteResult['sqlResult'] = $this->DataHandler->deleteData($sql);
+      $deleteResult['deleteId'] = $id;
+      $products = $this->readProducts();
+      $content = array('header' => $header, 'result' => $deleteResult, 'products'=>$products, 'footer' => $footer);
+      return $content;
+    } catch (Exception $e) {
+      throw $e;
+    }
   }
 
   public function deleteProduct($id) {
     try {
       $header = $this->readHeader();
       $footer = $this->readFooter();
-      $productInfo = $this->readProduct($id);
       $sql = "DELETE FROM products ";
       $sql .= "WHERE id = \"$id\"";
-      $this->DataHandler->deleteData($sql);
-      return $this->readProducts();
+      $deleteResult['sqlResult'] = $this->DataHandler->deleteData($sql);
+      $deleteResult['deleteId'] = $id;
+      $products = $this->readProducts();
+      $content = array('header' => $header, 'result' => $deleteResult, 'products'=>$products, 'footer' => $footer);
+      return $content;
     } catch (Exception $e) {
       throw $e;
     }
@@ -276,7 +321,7 @@ class ProductLogic {
 
   public function readFooter(){
     try {
-      $sql = 'SELECT * FROM footer';
+      $sql = 'SELECT * FROM footer ';
       $res = $this->DataHandler->readsData($sql);
       $results = $res->fetchAll();
       return $results;
@@ -395,17 +440,16 @@ class ProductLogic {
     }
   }
 
-  public function updateCopyright() { 
+  public function updateFooterData($data) { 
     try {
       $header = $this->readHeader();
       $footer = $this->readFooter();
       $sql = "UPDATE footer ";
-      $sql .= "SET content=\"" . $data["content"] . "\" ";
-      $sql .= "WHERE id = 1 ";
-      $res = $this->DataHandler->readsData($sql);
-      $results = $res->fetchAll();
-      $content = array("header"=>$header, "result"=>$results, "footer"=>$footer);
-      exit;
+      $sql .= "SET content=\"" . $data["value"] . "\" ";
+      $sql .= "WHERE id = \"" . $data["id"] . "\" ";
+      $updateResult = $this->DataHandler->updateData($sql);
+      $results = $this->readProducts($sql);
+      $content = array("header"=>$header, "result"=>$results["result"], "updateResult"=>$updateResult, "footer"=>$footer);
       return $content;
     } catch (Exception $e) {
       throw $e;
@@ -493,7 +537,7 @@ class ProductLogic {
       $res = $this->DataHandler->readsData($sql);
       $results = $res->fetchAll();
 
-      $content = array('header' => $header, 'result' => $results, 'products' => $products, 'footer' => $footer);
+      $content = array('header' => $header, 'result' => $results, 'products' => $products['result'], 'footer' => $footer);
       return $content;
     } catch (Exception $e) {
       throw $e;
@@ -516,6 +560,7 @@ class ProductLogic {
     try {
       $header = $this->readHeader();
       $footer = $this->readFooter();
+      $products = $this->readProducts();
       if (isset($data["username"]) && isset($data["password"])) {
         $sql = 'SELECT * FROM users WHERE username = "' . $data["username"] . '"';
         $res = $this->DataHandler->readsData($sql);
@@ -536,7 +581,7 @@ class ProductLogic {
       } else {
         $view = "login";
       }
-      $content = array('header' => $header, 'result'=>$results, 'view'=>$view, 'footer' => $footer);
+      $content = array('header' => $header, 'result'=>$results, 'products'=>$products["result"], 'view'=>$view, 'footer' => $footer);
       return $content;
     } catch (Exception $e) {
       throw $e;

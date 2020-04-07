@@ -99,6 +99,14 @@ if ($content['result'] != "") {
             <p>Percentage korting:<br><input type="text" name="salePercent"></p>
           </div>
           <div class="col-md-5">
+            <p>Archief:<br>
+            <select class="custom-select" id="inputGroupSelect01" name="archive">
+              <option value="true">Ja</option>
+              <option value="false" selected>Nee</option>
+            </select>
+            </p>
+          </div>
+          <div class="col-md-5">
             <p>EAN:<br><input type="text" name="EAN"></p>
           </div>
           <div class="col-md-5">

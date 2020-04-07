@@ -24,7 +24,7 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <?php
-        for ($i=0; $i <count($content['header'])-3 ; $i++) { 
+        for ($i=0; $i <count($content['header'])-4; $i++) { 
           if (isset($_SESSION["perms"]) && $_SESSION["perms"] == $content["header"][$i]["perms"] || $content["header"][$i]["perms"] == "everyone") {
             echo "
               <li class=\"nav-item\">

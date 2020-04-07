@@ -45,31 +45,49 @@ $products = $content['products'];
 // print_r($products['result']);
 // print_r($products);
 ?>
-<div class="album py-5 adminPanelBox" id="main">
-  <div class="container">
-    <?php
-    echo '<div class="row">';
-    for (; $startProducts < $startProductsCount; $startProducts++) {
-      if (!isset($products['result'][$startProducts])) {
-        break;
-      }
-      echo '
-      <div class="col-md-2">
-        <div class="my-3 p-3 bg-white rounded shadow-sm">
-          <h6 class=" adminCardTitle">'. $products['result'][$startProducts]["name"] . '</h6>
-          <div class="media text-muted pt-3 deleteCardTitle">
-            <img class="bd-placeholder-img mr-2 rounded" width="64" height="50" src="./view/assets/media/' . $products['result'][$startProducts]["pic"] . '" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" ><title>Placeholder</title><rect width="100%" height="100%" ></rect></img>
-            <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-              <div class="d-flex justify-content-between align-items-center w-100">
-                <strong class="text-gray-dark"></strong>
+<div class="album py-5" id="main">
+    <div class="container">
+      <?php
+      echo '<div class="row">';
+      for (; $startProducts < $startProductsCount; $startProducts++) {
+        if (!isset($products[$startProducts])) {
+          break;
+        }
+        echo '
+        <div class="col-md-12">
+        <ul class="list-group AdminProductsList">
+          <li class="list-group-item AdminProductsList">' . $products[$startProducts]["name"] . '</li>
+          <a href="?op=updateGoggleForm&id=' . $products[$startProducts]["id"] . '">Pas Product Aan </a>
+          
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteProduct">
+            Product verwijderen
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="deleteProduct" tabindex="-1" role="dialog" aria-labelledby="deleteProductTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Product verwijderen</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  Weet je zeker dat je het product wil verwijderen?<br>
+                  Dit kan niet ontdaan worden.
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Niet verwijderen</button>
+                  <form action="?op=deleteProduct" method="post">
+                    <input type="hidden" name="id" value="' . $products[$startProducts]["id"] . '">
+                    <input type="submit" class="btn btn-primary" value="Verwijder product">
+                  </form>
+                </div>
               </div>
-              <a href="?op=updateGoggleForm&id=' . $products['result'][$startProducts]["id"] . '">Pas Product Aan </a>
-              <button type="button" class="btn btn-danger btn-sm deleteProductAdminPanelButton" data-toggle="modal" data-target="#deleteProduct">
-                Product verwijderen
-              </button>
-              
             </div>
           </div>
+        </ul>
         </div>
         </div>
         <div class="modal fade deleteProductModal" id="deleteProduct" tabindex="-1" role="dialog" aria-labelledby="deleteProductTitle" aria-hidden="true">

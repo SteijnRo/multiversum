@@ -75,6 +75,15 @@ echo '
               <p>Percentage korting:<br><input type="text" name="salePercent" value="' . $product[0]["salePercent"] . '"></p>
             </div>
             <div class="col-md-5">
+              <p>Archief?:<br>
+                <select class="custom-select" id="inputGroupSelect01" name="archive">
+                  <option selected>Archief?</option>
+                  <option value="true">Ja</option>
+                  <option value="false">Nee</option>
+                </select>
+              </p>
+            </div>
+            <div class="col-md-5">
               <p>EAN:<br><input type="text" name="EAN" value="' . $product[0]["EAN"] . '"></p>
             </div>
             <div class="col-md-5">

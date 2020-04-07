@@ -52,11 +52,11 @@ class Controller {
         case 'orderOverview':
           $this->collectReadOrders();
         break;
-        case 'updateCopyrightForm':
-          $this->collectUpdateCopyrightData($_POST);
+        case 'updateFooterForm':
+          $this->collectUpdateFooterForm();
         break;
-        case 'updateCopyright':
-          $this->UpdateCopyright($data);
+        case 'updateFooter':
+          $this->collectUpdateFooterData($_POST);
         break;
         case 'privacy':
           $this->collectReadPrivacy();
@@ -155,10 +155,17 @@ class Controller {
     $content = $this->ProductLogic->readContacts();
     include_once 'view/updateContact.php';
   }
-  public function collectUpdateCopyrightData($data) {
-    $content = $this->ProductLogic->readCopyright();
+  public function collectUpdateFooterForm() {
+    $content["header"] = $this->ProductLogic->readHeader();
+    $content["footer"] = $this->ProductLogic->readFooter();
     // $content = $this->ProductLogic->collectReadCopyright();
-    include_once 'view/updateCopyright.php';
+    include_once 'view/updateFooter.php';
+  }
+
+  public function collectUpdateFooterData($data) {
+    $content = $this->ProductLogic->updateFooterData($data);
+    // $content = $this->ProductLogic->collectReadCopyright();
+    include_once 'view/main.php';
   }
 
   public function collectUpdateContact($data) {
