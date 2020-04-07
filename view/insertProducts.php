@@ -34,10 +34,10 @@ if ($content['result'] != "") {
     </h3>
     <h1>Voeg product toe</h1>
     <!-- Portfolio Item Heading -->
-    <form action="?op=addProduct" method="post" enctype="multipart/form-data">
+    <form action="?op=addProduct" method="post" onsubmit="succes()" enctype="multipart/form-data">
       <input type="hidden" name="id">
-      <h1 class="my-4">Titel:<br><input type="text" name="name"><br>
-        <small>Merk:<br></small><input type="text" name="brand">
+      <h1 class="my-4">Titel:<br><input type="text" name="name" required><br>
+        <small>Merk:<br></small><input type="text" name="brand" required>
       </h1>
 
       <!-- Portfolio Item Row -->
@@ -45,7 +45,7 @@ if ($content['result'] != "") {
 
         <div class="col-md-8">
           <h3>Plaatje: <br></h3>
-          <input type="file" class="form-control" name="pic" value="-" placeholder="Picture">
+          <input type="file" class="form-control" name="pic" value="-" placeholder="Picture" required>
         </div>
         
         <div class="col-md-8">
@@ -54,22 +54,22 @@ if ($content['result'] != "") {
         </div>
         <div class="row description">
           <div class="col-md-5">
-            <p>Prijs (€):<br><input type="text" name="price"></p>
+            <p>Prijs (€):<br><input type="text" name="price" required></p>
           </div>
           <div class="col-md-5">
-            <p>Platform:<br><input type="text" name="platform"></p>
+            <p>Platform:<br><input type="text" name="platform" required></p>
           </div>
           <div class="col-md-5">
-            <p>Resolutie:<br><input type="text" name="resolution"></p>
+            <p>Resolutie:<br><input type="text" name="resolution" required></p>
           </div>
           <div class="col-md-5">
-            <p>Refresh rate:<br><input type="text" name="refreshRate"></p>
+            <p>Refresh rate:<br><input type="text" name="refreshRate" required></p>
           </div>
           <div class="col-md-5">
             <p>Functies (VR-bril):<br><input type="text" name="functions"></p>
           </div>
           <div class="col-md-5">
-            <p>Aansluitingen VR-bril:<br><input type="text" name="physicalConnections"></p>
+            <p>Aansluitingen VR-bril:<br><input type="text" name="physicalConnections" required></p>
           </div>
           <div class="col-md-5">
             <p>Gezichtsveld (°):<br><input type="text" name="fov"></p>
@@ -84,7 +84,7 @@ if ($content['result'] != "") {
             <p>Bijzonderheden:<br><input type="text" name="special"></p>
           </div>
           <div class="col-md-5">
-            <p>Aantal:<br><input type="text" name="qty"></p>
+            <p>Aantal:<br><input type="text" name="qty" required></p>
           </div>
           <div class="col-md-5">
             <p>Korting?:<br>
@@ -107,10 +107,10 @@ if ($content['result'] != "") {
             </p>
           </div>
           <div class="col-md-5">
-            <p>EAN:<br><input type="text" name="EAN"></p>
+            <p>EAN:<br><input type="text" name="EAN" required></p>
           </div>
           <div class="col-md-5">
-            <p>SKU:<br><input type="text" name="SKU"></p>
+            <p>SKU:<br><input type="text" name="SKU" required></p>
           </div>
           <div class="col-md-5">
           </div>
@@ -122,6 +122,11 @@ if ($content['result'] != "") {
     </form>
   </div>
 </div>
+<script>
+function succes() {
+  alert("Het product is toegevoegd!");
+}
+</script>
 <?php
 include_once "view/footer.php";
 ?>

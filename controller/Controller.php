@@ -32,7 +32,7 @@ class Controller {
           $this->collectUpdateGoggle($_POST, $_FILES);
         break;
         case 'deleteProduct':
-          $this->collectDeleteProduct();
+          $this->collectDeleteProduct($_GET["id"]);
         break;
         case 'sendEmail':
           $this->collectSendEmail($_POST);

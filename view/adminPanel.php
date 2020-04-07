@@ -30,7 +30,7 @@ function d($a)
 </div>
 
 <?php
-$productsPerPage = 25;
+$productsPerPage = 999;
 $page = 1;
 
 if (isset($_GET["page"])) {
@@ -64,15 +64,15 @@ $products = $content['products'];
                 <strong class="text-gray-dark"></strong>
               </div>
               <a href="?op=updateGoggleForm&id=' . $products[$startProducts]["id"] . '">Pas Product Aan </a>
-              <button type="button" class="btn btn-danger btn-sm deleteProductAdminPanelButton" data-toggle="modal" data-target="#deleteProduct">
-                Product verwijderen
+              <button type="button" class="btn btn-danger btn-sm deleteProductAdminPanelButton" data-toggle="modal" data-target="#deleteProduct-' . $products[$startProducts]["id"] . '">
+                Product verwijderen                
               </button>
               
             </div>
           </div>
         </div>
         </div>
-        <div class="modal fade deleteProductModal" id="deleteProduct" tabindex="-1" role="dialog" aria-labelledby="deleteProductTitle" aria-hidden="true">
+        <div class="modal fade deleteProductModal" id="deleteProduct-' . $products[$startProducts]["id"] . '" tabindex="-1" role="dialog" aria-labelledby="deleteProductTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -86,7 +86,7 @@ $products = $content['products'];
               Dit kan niet ontdaan worden.
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Niet verwijderen</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">' . $products[$startProducts]["id"] . '</button>
               <form action="?op=deleteProduct" method="post">
                 <input type="hidden" name="id" value="' . $products[$startProducts]["id"] . '">
                 <input type="submit" class="btn btn-danger" value="Verwijder product">
