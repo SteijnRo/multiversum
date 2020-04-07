@@ -218,6 +218,11 @@ html, body {
     margin-bottom: 20px;
 }
 
+.paginationDiv a {
+    background-color: #2C3E50;
+    border-color: gray;
+}
+
 #orderConfirmModal {
     color: black;
 }
@@ -226,6 +231,34 @@ html, body {
     margin: 20px;
 }
 
-.AdminProductsList {
+.adminCardTitle {
     color: black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
+/* .deleteProductButtonAdminPanel input{
+    background-color: #b40f0f;
+    border-color: white;
+} */
+
+.adminPanelBox {
+    margin-left: 20px;
+}
+
+.deleteProductModal {
+    color: black;
+}
+
+.deleteCardTitle {
+    padding: 0px;
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 420px;
+    padding: 15px;
+    margin: 0 auto;
+    margin-top: 70px;
 }

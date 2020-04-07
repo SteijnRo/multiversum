@@ -51,10 +51,6 @@ $products = $content['result'];
                 <input type="hidden" name="productID" value="' . $products[$startProducts]["id"] . '">
                 <input type="submit" value="Koop nu">
               </form>
-              <form action="?op=deleteProduct" method="post">
-                <input type="hidden" name="id" value="' . $products[$startProducts]["id"] . '">
-                <input type="submit" value="Verwijder product">
-              </form>
             </div>
           </div>
         </div>
@@ -67,7 +63,7 @@ $products = $content['result'];
       echo '<div class="col-md-12 center-block text-center paginationDiv">';
       for ($i = 0; $i < $buttonAmount; $i++) {
         $iPlusOne = $i + 1;
-        echo "<a href=\"?page=$iPlusOne\" class=\"btn btn-primary btn-lg\">$iPlusOne</a>\t";
+        echo "<a href=\"?page=$iPlusOne\" class=\"btn btn-secondary btn-lg\">$iPlusOne</a>\t";
       }
       echo '</div>';
       ?>
