@@ -16,6 +16,7 @@ $products = $content["result"]["products"];
                 <th>Order #</th>
                 <th>Verkocht product</th>
                 <th>Totaal prijs inclusief BTW</th>
+                <th>Datum <small><b>(YYYY/MM/DD)</b></small></th>
               </tr>
             ';
             for ($i = 0; $i < count($orders); $i++) {
@@ -24,9 +25,10 @@ $products = $content["result"]["products"];
               ';
               for ($j = 0; $j < count($products[$i]); $j++) {
                 echo '
-                <th>' . $orders[$i]["id"] . '</th>
-                <th>' . $products[$i][$j]["name"] . '</th>
-                <th>' . $products[$i][$j]["price"] . '</th>
+                <td>' . $orders[$i]["id"] . '</td>
+                <td>' . $products[$i][$j]["name"] . '</td>
+                <td>' . $orders[$i]["paidPrice"] . '</td>
+                <td>' . $orders[$i]["date"] . '</td>
                 ';
               }
               echo '

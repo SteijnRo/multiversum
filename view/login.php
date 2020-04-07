@@ -13,12 +13,12 @@ include 'view/header.php';
 </form> -->
 <form class="form-signin" _lpchecked="1"  action="?op=loginSubmit" method="post">
     <div class="form-label-group">
-        <label for="inputEmail">Username</label>
-        <input type="username" name="username"  class="form-control" placeholder="Email address"  autofocus="" autocomplete="off">
+        <label for="inputEmail">Gebruikersnaam</label>
+        <input type="username" name="username"  class="form-control" autofocus="" autocomplete="off">
     </div>
     <div class="form-label-group">
-        <label for="inputPassword">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="" autocomplete="off">
+        <label for="inputPassword">Wachtwoord</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" required="" autocomplete="off">
     </div>
     <br>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>

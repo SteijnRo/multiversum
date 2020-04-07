@@ -30,7 +30,7 @@ function d($a)
 </div>
 
 <?php
-$productsPerPage = 999;
+$productsPerPage = 999999999;
 $page = 1;
 
 if (isset($_GET["page"])) {
@@ -86,7 +86,7 @@ $products = $content['products'];
               Dit kan niet ontdaan worden.
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">' . $products[$startProducts]["id"] . '</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Product niet verwijderen</button>
               <form action="?op=deleteProduct" method="post">
                 <input type="hidden" name="id" value="' . $products[$startProducts]["id"] . '">
                 <input type="submit" class="btn btn-danger" value="Verwijder product">

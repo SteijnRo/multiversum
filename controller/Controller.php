@@ -32,7 +32,7 @@ class Controller {
           $this->collectUpdateGoggle($_POST, $_FILES);
         break;
         case 'deleteProduct':
-          $this->collectDeleteProduct($_GET["id"]);
+          $this->collectDeleteProduct($_POST["id"]);
         break;
         case 'sendEmail':
           $this->collectSendEmail($_POST);
@@ -92,7 +92,7 @@ class Controller {
   }
   public function collectCreateProduct() {
     $content = $this->ProductLogic->createProduct($_POST, $_FILES);
-    include_once 'view/insertProducts.php';
+    include_once 'view/' . $content["view"] . '.php';
   }
 
   public function collectCreateOrder() {
@@ -102,7 +102,7 @@ class Controller {
 
   public function collectInsertFormProducts() {
     $content = $this->ProductLogic->insertFormProducts();
-    include_once 'view/insertProducts.php';
+    include_once 'view/' . $content["view"] . '.php';
   }
 
   public function collectReadProducts() { 
@@ -142,35 +142,34 @@ class Controller {
   }
 
   public function collectReadProductUpdate($id) {
-    $content = $this->ProductLogic->readProduct($id);
-    include_once 'view/updateGoggle.php';
+    $content = $this->ProductLogic->readProductAdmin($id);
+    include_once 'view/' . $content["view"] . '.php';
   }
 
   public function collectUpdateGoggle($data, $files) {
     $content = $this->ProductLogic->updateGoggle($data, $files);
-    print_r($content);
+    include_once 'view/' . $content["view"] . '.php';
   }
 
-  public function collectUpdateContactData($data) {
-    $content = $this->ProductLogic->readContacts();
-    include_once 'view/updateContact.php';
+  public function collectUpdateContactData() {
+    $content = $this->ProductLogic->readContactsForm();
+    include_once 'view/' . $content["view"] . '.php';
   }
   public function collectUpdateFooterForm() {
-    $content["header"] = $this->ProductLogic->readHeader();
-    $content["footer"] = $this->ProductLogic->readFooter();
+    $content = $this->ProductLogic->updateFooterForm();
     // $content = $this->ProductLogic->collectReadCopyright();
-    include_once 'view/updateFooter.php';
+    include_once 'view/' . $content["view"] . '.php';
   }
 
   public function collectUpdateFooterData($data) {
     $content = $this->ProductLogic->updateFooterData($data);
     // $content = $this->ProductLogic->collectReadCopyright();
-    include_once 'view/main.php';
+    include_once 'view/' . $content["view"] . '.php';
   }
 
   public function collectUpdateContact($data) {
     $content = $this->ProductLogic->updateContacts($data);
-    print_r($content);
+    include_once 'view/' . $content["view"] . '.php';
   }
 
   public function collectReadBuyForm() {
@@ -180,7 +179,7 @@ class Controller {
 
   public function collectDeleteProduct() {
     $content = $this->ProductLogic->deleteProduct($_POST["id"]);
-    include_once 'view/main.php';
+    include_once 'view/' . $content["view"] . '.php';
   }
 
   public function collectReadHeader() {
@@ -190,7 +189,7 @@ class Controller {
 
   public function collectReadAdminPanel() {
     $content = $this->ProductLogic->readAdminPanel();
-    include_once 'view/adminPanel.php';
+    include_once 'view/' . $content["view"] . '.php';
   }
   
   public function collectReadLoginForm() {

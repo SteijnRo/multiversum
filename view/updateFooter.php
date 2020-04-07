@@ -49,6 +49,6 @@ $copyright = $content['result'];
 
     </ul>
 
- <?php
+<?php
 include 'view/footer.php';
 ?>

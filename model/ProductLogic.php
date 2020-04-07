@@ -14,9 +14,15 @@ class ProductLogic {
   public function __destruct() { }
   public function createProduct($data, $files) {
     try {
+      $sessionCheckResult = $this->sessionCheck();
+      if ($sessionCheckResult != "continue") {
+        return $sessionCheckResult;
+      } else {
+        $view = "insertProducts";
+      }
       $header = $this->readHeader();
       $footer = $this->readFooter();
-      $content = array('header' => $header, 'result' => "", 'footer' => $footer);
+      $content = array('header' => $header, 'result' => "", 'view'=>$view, 'footer' => $footer);
       if (!isset($data["name"]) || !isset($data["brand"]) || !isset($data["description"]) || !isset($files["pic"]) || !isset($data["price"]) || !isset($data["qty"]) || !isset($data["sale"]) || !isset($data["salePercent"])) {
         return $content;
       }
@@ -28,9 +34,8 @@ class ProductLogic {
       }
       $sql = 'INSERT INTO products (name, brand, description, pic, price, platform, resolution, refreshRate, functions, physicalConnections, fov, accesories, insurance, special, qty, sale, salePercent, archive, EAN, SKU) ';
       $sql .= 'VALUES("' . $data["name"] . '", "' . $data["brand"] . '", "' . $data["description"] . '", "' . $files["pic"]["name"] . '", "' . $data["price"] . '", "' . $data["platform"] . '", "' . $data["resolution"] . '", "' . $data["refreshRate"] . '", "' . $data["functions"] . '", "' . $data["physicalConnections"] . '", "' . $data["fov"] . '", "' . $data["accesories"] . '", "' . $data["insurance"] . '", "' . $data["special"] . '", "' . $data["qty"] . '", "' . $data["sale"] . '", "' . $data["salePercent"] . '", "' . $data["archive"] . '", "' . $data["EAN"] . '", "' . $data["SKU"] . '") ';
-      // INSERT INTO products (name, brand, specification, pic, price, qty, sale, salePercent) VALUES("test", "samsung", "yes", "stonks.jpg", 123, 1, 0, 0);
       $results = $this->DataHandler->createData($sql);
-      $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
+      $content = array('header' => $header, 'result' => $results, 'view'=>$view, 'footer' => $footer);
       return $content;
     } catch (Exception $e) {
       throw $e;
@@ -88,9 +93,9 @@ class ProductLogic {
       $headsetData = $this->readProduct($productIDs);
       
       $paidPrice = $headsetData["result"][0]["price"];
-
-      $sql = 'INSERT INTO orders (productIDs, paidPrice, name, adress, city, state, postcode, telNum, email) ';
-      $sql .= 'VALUES("' . $productIDs . '", "' . trim($paidPrice) . '", "' . trim($data["name"]) . '", "' . trim($data["adress"]) . '", "' . trim($data["city"]) . '", "' . trim($data["state"]) . '", "' . trim($data["postcode"]) . '", "' . trim($data["telNum"]) . '", "' . trim($data["email"]) . '") ';
+      $datetime = date("Y-m-d H:i:s");
+      $sql = 'INSERT INTO orders (productIDs, paidPrice, name, adress, city, state, postcode, telNum, email, date) ';
+      $sql .= 'VALUES("' . $productIDs . '", "' . trim($paidPrice) . '", "' . trim($data["name"]) . '", "' . trim($data["adress"]) . '", "' . trim($data["city"]) . '", "' . trim($data["state"]) . '", "' . trim($data["postcode"]) . '", "' . trim($data["telNum"]) . '", "' . trim($data["email"]) . '", "' . trim($datetime) . '") ';
       $results = $this->DataHandler->createData($sql);
       $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
       return $content;
@@ -108,6 +113,27 @@ class ProductLogic {
       $res = $this->DataHandler->readsData($sql);
       $results = $res->fetchAll();
       $content = array("header"=>$header, "result"=>$results, "footer"=>$footer);
+      return $content;
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
+  public function readProductAdmin($id) { 
+    try {
+      $sessionCheckResult = $this->sessionCheck();
+      if ($sessionCheckResult != "continue") {
+        return $sessionCheckResult;
+      } else {
+        $view = "updateGoggle";
+      }
+      $header = $this->readHeader();
+      $footer = $this->readFooter();
+      $sql = "SELECT * FROM products ";
+      $sql .= "WHERE id = $id ";
+      $res = $this->DataHandler->readsData($sql);
+      $results = $res->fetchAll();
+      $content = array("header"=>$header, "result"=>$results, 'view'=> $view, "footer"=>$footer);
       return $content;
     } catch (Exception $e) {
       throw $e;
@@ -132,6 +158,12 @@ class ProductLogic {
 
   public function readOrders() {
     try {
+      $sessionCheckResult = $this->sessionCheck();
+      if ($sessionCheckResult != "continue") {
+        return $sessionCheckResult;
+      } else {
+        $view = "readOrders";
+      }
       $header = $this->readHeader();
       $footer = $this->readFooter();
       $qry = "SELECT * ";
@@ -153,7 +185,7 @@ class ProductLogic {
 
       $results = array("orders"=>$orders, "products"=>$productDetailsArray);
 
-      $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
+      $content = array('header' => $header, 'result' => $results, 'view'=>$view, 'footer' => $footer);
       return $content;
     } catch (Exception $e) {
       throw $e;
@@ -161,11 +193,17 @@ class ProductLogic {
   }
 
   public function insertFormProducts() {
-    $header = $this->readHeader();
-    $footer = $this->readFooter();
     try {
+      $sessionCheckResult = $this->sessionCheck();
+      if ($sessionCheckResult != "continue") {
+        return $sessionCheckResult;
+      } else {
+        $view = "insertProducts";
+      }
+      $header = $this->readHeader();
+      $footer = $this->readFooter();
       // nothing as of yet
-      $content = array('header' => $header, 'result' => "", 'footer' => $footer);
+      $content = array('header' => $header, 'result' => "", 'view'=>$view, 'footer' => $footer);
       return $content;
     } catch (Exception $e) {
       throw $e;
@@ -174,6 +212,12 @@ class ProductLogic {
 
   public function updateGoggle($data, $files) {
     try {
+      $sessionCheckResult = $this->sessionCheck();
+      if ($sessionCheckResult != "continue") {
+        return $sessionCheckResult;
+      } else {
+        $view = "updateGoggle";
+      }
       $header = $this->readHeader();
       $footer = $this->readFooter();
       if (empty($data)) {
@@ -212,8 +256,7 @@ class ProductLogic {
       }
       $result = $this->DataHandler->updateData($sql);
       $formContent = $this->readProduct($data["id"]);
-      $results = $formContent;
-      $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
+      $content = array('header' => $header, 'result' => $formContent["result"], 'view'=>$view, 'footer' => $footer);
       return $content;
     } catch (Exception $e) {
       throw $e;
@@ -222,27 +265,23 @@ class ProductLogic {
 
   public function updateContacts($data) {
     try {
+      $sessionCheckResult = $this->sessionCheck();
+      if ($sessionCheckResult != "continue") {
+        return $sessionCheckResult;
+      } else {
+        $view = "updateContact";
+      }
       $header = $this->readHeader();
       $footer = $this->readFooter();
       if (empty($data)) {
-        return $content = array('header' => $header, 'result' => "Geen waardes meegegeven", 'footer' => $footer);
+        $view = "updateContact";
+        $formContent = $this->readContacts();
+        return $content = array('header' => $header, 'result' => "Geen waardes meegegeven", 'view'=>$view, 'footer' => $footer);
       }
       foreach ($data as $key => $value) {
         if ($data[$key] == "") {
           $data[$key] = "-";
         }
-      }
-
-      if ($data["sale"] == "true") {
-        $data["sale"] = 1;
-      } else {
-        $data["sale"] = 0;
-      }
-
-      if ($data["archive"] == "true") {
-        $data["archive"] = 1;
-      } else {
-        $data["archive"] = 0;
       }
       
       if ($data["formType"] == "companyHours") {
@@ -261,8 +300,7 @@ class ProductLogic {
         $this->DataHandler->updateData($sql);
       }
       $formContent = $this->readContacts();
-      $results = $formContent;
-      $content = array('header' => $header, 'result' => $results, 'footer' => $footer);
+      $content = array('header' => $header, 'result' => $formContent["result"], 'businesshours'=>$formContent["businesshours"], 'view'=>$view, 'footer' => $footer);
       return $content;
     } catch (Exception $e) {
       throw $e;
@@ -277,6 +315,12 @@ class ProductLogic {
 
   public function archiveProduct($id) {
     try {
+      $sessionCheckResult = $this->sessionCheck();
+      if ($sessionCheckResult != "continue") {
+        return $sessionCheckResult;
+      } else {
+        $view = "updateGoggle";
+      }
       $header = $this->readHeader();
       $footer = $this->readFooter();
       $sql = 'UPDATE product ';
@@ -285,7 +329,7 @@ class ProductLogic {
       $deleteResult['sqlResult'] = $this->DataHandler->deleteData($sql);
       $deleteResult['deleteId'] = $id;
       $products = $this->readProducts();
-      $content = array('header' => $header, 'result' => $deleteResult, 'products'=>$products, 'footer' => $footer);
+      $content = array('header' => $header, 'result' => $deleteResult, 'products'=>$products, 'view'=>$view, 'footer' => $footer);
       return $content;
     } catch (Exception $e) {
       throw $e;
@@ -294,6 +338,12 @@ class ProductLogic {
 
   public function deleteProduct($id) {
     try {
+      $sessionCheckResult = $this->sessionCheck();
+      if ($sessionCheckResult != "continue") {
+        return $sessionCheckResult;
+      } else {
+        $view = "adminPanel";
+      }
       $header = $this->readHeader();
       $footer = $this->readFooter();
       $sql = "DELETE FROM products ";
@@ -301,7 +351,8 @@ class ProductLogic {
       $deleteResult['sqlResult'] = $this->DataHandler->deleteData($sql);
       $deleteResult['deleteId'] = $id;
       $products = $this->readProducts();
-      $content = array('header' => $header, 'result' => $deleteResult, 'products'=>$products, 'footer' => $footer);
+
+      $content = array('header' => $header, 'products'=>$products["result"], 'deleteResult' => $deleteResult, 'view'=>$view, 'footer' => $footer);
       return $content;
     } catch (Exception $e) {
       throw $e;
@@ -427,6 +478,29 @@ class ProductLogic {
     }
   }
 
+  public function readContactsForm(){
+    try {
+      $sessionCheckResult = $this->sessionCheck();
+      if ($sessionCheckResult != "continue") {
+        return $sessionCheckResult;
+      } else {
+        $view = "updateContact";
+      }
+      $header = $this->readHeader();
+      $footer = $this->readFooter();
+      $businesshours = $this->readBusinessHours();
+      $qry = "SELECT * ";
+      $qry .= "FROM contact ";
+      $res = $this->DataHandler->readsData($qry);
+      $result = $res->fetchAll();
+      // $result= array();
+      $content = array('header' => $header, 'result' => $result, 'businesshours' => $businesshours, 'view'=>$view, 'footer' =>$footer);
+      return $content;
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
   public function readBusinessHours() {
     try {
     $qry = "SELECT id, weekDay, openH, closeH ";
@@ -440,8 +514,31 @@ class ProductLogic {
     }
   }
 
+  public function updateFooterForm() { 
+    try {
+      $sessionCheckResult = $this->sessionCheck();
+      if ($sessionCheckResult != "continue") {
+        return $sessionCheckResult;
+      } else {
+        $view = "updateFooter";
+      }
+      $header = $this->readHeader();
+      $footer = $this->readFooter();
+      $content = array("header"=>$header, 'view'=>$view, "footer"=>$footer);
+      return $content;
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
   public function updateFooterData($data) { 
     try {
+      $sessionCheckResult = $this->sessionCheck();
+      if ($sessionCheckResult != "continue") {
+        return $sessionCheckResult;
+      } else {
+        $view = "updateFooter";
+      }
       $header = $this->readHeader();
       $footer = $this->readFooter();
       $sql = "UPDATE footer ";
@@ -449,7 +546,7 @@ class ProductLogic {
       $sql .= "WHERE id = \"" . $data["id"] . "\" ";
       $updateResult = $this->DataHandler->updateData($sql);
       $results = $this->readProducts($sql);
-      $content = array("header"=>$header, "result"=>$results["result"], "updateResult"=>$updateResult, "footer"=>$footer);
+      $content = array("header"=>$header, "result"=>$results["result"], "updateResult"=>$updateResult, 'view'=>$view, "footer"=>$footer);
       return $content;
     } catch (Exception $e) {
       throw $e;
@@ -530,6 +627,12 @@ class ProductLogic {
 
   public function readAdminPanel() {
     try {
+      $sessionCheckResult = $this->sessionCheck();
+      if ($sessionCheckResult != "continue") {
+        return $sessionCheckResult;
+      } else {
+        $view = "adminPanel";
+      }
       $header = $this->readHeader();
       $footer = $this->readFooter();
       $products = $this->readProducts();
@@ -537,7 +640,7 @@ class ProductLogic {
       $res = $this->DataHandler->readsData($sql);
       $results = $res->fetchAll();
 
-      $content = array('header' => $header, 'result' => $results, 'products' => $products['result'], 'footer' => $footer);
+      $content = array('header' => $header, 'result' => $results, 'products' => $products['result'], 'view'=>$view, 'footer' => $footer);
       return $content;
     } catch (Exception $e) {
       throw $e;
@@ -590,15 +693,32 @@ class ProductLogic {
 
   public function readLogout() {
     try {
+      session_destroy();
       $header = $this->readHeader();
       $footer = $this->readFooter();
       
       $products = $this->readProducts();
 
-      session_destroy();
 
       $content = array('header' => $header, 'result'=>$products["result"], 'footer' => $footer);
       return $content;
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
+  public function sessionCheck() {
+    try {
+      if (isset($_SESSION["perms"]) && $_SESSION["perms"] == "admin") {
+        return "continue";
+      } else {
+        $header = $this->readHeader();
+        $footer = $this->readFooter();
+        $mainContent = $this->readProducts();
+        $view = "main";
+        $content = array('header' => $header, 'result'=>$mainContent["result"], 'view'=>$view, 'footer' => $footer);
+        return $content;
+      }
     } catch (Exception $e) {
       throw $e;
     }
