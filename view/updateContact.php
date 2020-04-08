@@ -3,7 +3,7 @@ include 'view/header.php';
 ?>
 <div class="container">
   <div class="row d-flex justify-content-center business-hours">
-    <form action="?op=updateContact" method="post">
+    <form action="?op=updateContact" onsubmit="succes()" method="post">
       <input type="hidden" name="formType" value="companyHours">
       <div class="col-sm-12">
       <h2 class="title">Openingstijden</h2>
@@ -20,7 +20,7 @@ include 'view/header.php';
     </form>
   </div>
     <div class="col-sm-3">
-      <form action="?op=updateContact" method="post">
+      <form action="?op=updateContact" onsubmit="succes()" method="post">
         <input type="hidden" name="formType" value="companyInfo">
       <h2 class="title">Bedrijfsgegevens</h2>
       Multiverse
@@ -44,6 +44,11 @@ include 'view/header.php';
     <a href="?op=adminPanel">Ga terug</a>
   </small>
 </h3>
+<script>
+function succes() {
+  alert("Contactinformatie geupdatet!");
+}
+</script>
 <?php
 include './view/footer.php'; 
 ?>
