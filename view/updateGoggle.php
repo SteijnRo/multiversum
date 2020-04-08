@@ -9,7 +9,7 @@ echo '
     <div class="col-md-8 ">
       <h1>Pas hier het product aan</h1>
       <!-- Portfolio Item Heading -->
-      <form action="?op=updateGoggle" method="post" enctype="multipart/form-data">
+      <form action="?op=updateGoggle" method="post" onsubmit="succes()" enctype="multipart/form-data">
         <input type="hidden" name="id" value="' . $product[0]["id"] . '">
         <h1 class="my-4">Titel:<br><input type="text" name="name" value="' . $product[0]["name"] . '"><br>
           <small>Merk:<br><input type="text" name="brand" value="' . $product[0]["brand"] . '"></small>
@@ -102,5 +102,9 @@ echo '
 ';
 ?>
 
-
+<script>
+function succes() {
+  alert("Product succesvol geupdatet!");
+}
+</script>
 <?php include 'view/footer.php'; ?>

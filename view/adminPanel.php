@@ -87,7 +87,7 @@ $products = $content['products'];
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Product niet verwijderen</button>
-              <form action="?op=deleteProduct" method="post">
+              <form action="?op=deleteProduct" onsubmit="succes()" method="post">
                 <input type="hidden" name="id" value="' . $products[$startProducts]["id"] . '">
                 <input type="submit" class="btn btn-danger" value="Verwijder product">
               </form>
@@ -101,6 +101,11 @@ $products = $content['products'];
     ?>
   </div>
 </div>
+<script>
+function succes() {
+  alert("Het product is verwijderd.");
+}
+</script>
 <?php
 include_once "view/footer.php";
 //v2

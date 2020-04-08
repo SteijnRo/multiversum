@@ -1,6 +1,8 @@
 <?php
 include 'view/header.php';
-$copyright = $content['result'];
+if (isset($content["result"])) {
+  $copyright = $content['result'];
+}
 ?>
     <ul class="list-inline mx-auto justify-content-center" id="privacy-statement">
     <h3>
@@ -9,7 +11,7 @@ $copyright = $content['result'];
       </small>
     </h3>
         <div class="row">
-        <form action="?op=updateFooter" method="post">
+        <form action="?op=updateFooter" onsubmit="succes()" method="post">
             <div class="col-md-12">
             <input type="hidden" name="id" value="1">
             <p><textarea name="value" class="form-control" rows="5" id="comment" name="text"><?php echo $content["footer"][0]["content"]; ?></textarea></p>
@@ -18,7 +20,7 @@ $copyright = $content['result'];
               <button type="submit" class="btn btn-primary" style="margin-top:20px;">Update copyright</button>
             </div>
           </form>
-          <form action="?op=updateFooter" method="post">
+          <form action="?op=updateFooter" onsubmit="succes()" method="post">
             <div class="col-md-12">
             <input type="hidden" name="id" value="2">
             <p><textarea name="value" class="form-control" rows="5" id="comment" name="text"><?php echo $content["footer"][1]["content"]; ?></textarea></p>
@@ -27,7 +29,7 @@ $copyright = $content['result'];
               <button type="submit" class="btn btn-primary" style="margin-top:20px;">Update algemene voorwaarden</button>
             </div>
           </form>
-          <form action="?op=updateFooter" method="post">
+          <form action="?op=updateFooter" onsubmit="succes()" method="post">
             <div class="col-md-12">
             <input type="hidden" name="id" value="3">
             <p><textarea name="value" class="form-control" rows="5" id="comment" name="text"><?php echo $content["footer"][2]["content"]; ?></textarea></p>
@@ -36,7 +38,7 @@ $copyright = $content['result'];
               <button type="submit" class="btn btn-primary" style="margin-top:20px;">Update privacy</button>
             </div>
           </form>
-          <form action="?op=updateFooter" method="post">
+          <form action="?op=updateFooter" onsubmit="succes()" method="post">
             <div class="col-md-12">
             <input type="hidden" name="id" value="4">
             <p><textarea name="value" class="form-control" rows="5" id="comment" name="text"><?php echo $content["footer"][3]["content"]; ?></textarea></p>
@@ -48,7 +50,11 @@ $copyright = $content['result'];
         </div>
 
     </ul>
-
+<script>
+function succes() {
+  alert("Footer succesvol geupdatet");
+}
+</script>
 <?php
 include 'view/footer.php';
 ?>
