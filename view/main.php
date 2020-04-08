@@ -56,6 +56,8 @@ $products = $content['result'];
             </div>
           </div>
           ';
+        } else {
+          $startProductsCount++;
         }
         // rating
       }
